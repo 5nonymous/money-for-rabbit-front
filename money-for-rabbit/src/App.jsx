@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './styles/layout/Layout';
 import { css } from '@emotion/react';
 import Home from './pages/home/Home';
+import UserPage from './pages/user-page/UserPage';
 import NotFound from './pages/error/NotFound';
 import Done from './pages/withdrawal/Done';
 
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Layout page={<Home />} />} />
+          <Route path='/user/:userId/' element={<Layout page={<UserPage />} />} />
           <Route path='/*' element={<Layout page={<NotFound />} />} />
           <Route path="/withdrawal/done" element={<Layout page={<Done />} />} />
         </Routes>
