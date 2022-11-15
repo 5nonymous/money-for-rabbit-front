@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './styles/layout/Layout';
 import { css } from '@emotion/react';
 import Home from './pages/home/Home';
+import Done from './pages/withdrawal/Done';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout page={<Home />} />} />
+          <Route path="/withdrawal/done" element={<Layout page={<Done />} />} />
         </Routes>
       </BrowserRouter>
     </div>
