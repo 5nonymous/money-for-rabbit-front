@@ -3,7 +3,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import palette from '../../styles/palette';
+import common from '../../styles/common';
 import { useParams } from 'react-router-dom';
 import { getBackgroundImage, getRabbitImage } from '../../utils/getDynamicImage';
 
@@ -60,8 +60,8 @@ const wrapper = css`
   justify-content: space-between;
   flex-direction: column;
 
-  ${palette.fontSize[20]}
-  ${palette.fontWeight.bold};
+  ${common.fontSize[20]}
+  ${common.fontWeight.bold};
 
   user-select: none;
 `;
@@ -70,11 +70,11 @@ const introText = css`
   padding: 37px 14px;
   width: 100%;
 
-  color: ${palette.color.brown4};
+  color: ${common.color.brown4};
 
   // collected money
   & > div:last-child > span {
-    color: ${palette.color.brown5};
+    color: ${common.color.brown5};
   }
 `;
 

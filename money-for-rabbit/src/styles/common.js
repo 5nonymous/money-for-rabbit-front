@@ -44,11 +44,11 @@ const align = {
   `,
 };
 
-const palette = {
+const common = {
   color,
   fontSize,
   fontWeight,
   align,
 };
 
-export default palette;
+export default common;
