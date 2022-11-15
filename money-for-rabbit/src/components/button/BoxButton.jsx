@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { css } from '@emotion/react';
+import palette from '../../styles/palette';
 
 function BoxButton({ children, onClick, half, light, user }) {
   const buttonStyles = [boxButtonBase];
@@ -38,35 +39,35 @@ const boxButtonBase = css`
 `;
 
 const username = css`
-  background: #fff3db;
+  background: ${palette.color.brown1};
   padding: 17px 20px;
   width: fit-content;
   height: fit-content;
 
-  color: #c39d52;
-  font-size: 30px;
-  font-weight: 600;
+  color: ${palette.color.brown4};
+  ${palette.fontSize[30]}
+  ${palette.fontWeight.semiBold}
 `;
 
 const fullWidth = css`
   width: 85%;
   padding: 20px 0;
-  font-size: 24px;
+  ${palette.fontSize[24]}
 `;
 
 const halfWidth = css`
   width: 42.5%;
   padding: 15px 0;
-  font-size: 18px;
+  ${palette.fontSize[18]}
 `;
 
 const bgDark = css`
-  background: #c39d52;
-  color: #fff3db;
+  background: ${palette.color.brown4};
+  color: ${palette.color.brown1};
 `;
 
 const bgLight = css`
-  background: #fff;
-  border: 1px solid #c39d52;
-  color: #c39d52;
+  background: ${palette.color.white};
+  border: 1px solid ${palette.color.brown4};
+  color: ${palette.color.brown4};
 `;

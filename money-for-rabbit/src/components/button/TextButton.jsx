@@ -4,6 +4,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import palette from './../../styles/palette';
 
 function TextButton({ label, onClick }) {
   return label === '이전' ? (
@@ -23,13 +24,13 @@ const textButtonBase = css`
 
 const prev = css`
   ${textButtonBase}
-  color: #c39d52;
+  color: ${palette.color.brown4};
   font-size: 24px;
 `;
 
 const more = css`
   ${textButtonBase}
-  color: #ecd189;
+  color: ${palette.color.brown3};
   font-size: 16px;
 `;
 

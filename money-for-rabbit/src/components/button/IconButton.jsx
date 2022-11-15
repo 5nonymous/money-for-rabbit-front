@@ -4,6 +4,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faShareNodes } from '@fortawesome/free-solid-svg-icons';
+import palette from './../../styles/palette';
 
 function IconButton({ onClick, big, img, capture, share }) {
   const buttonStyles = [iconButtonBase];
@@ -39,18 +40,18 @@ const iconButtonBase = css`
 `;
 
 const bgDark = css`
-  background: #c39d52;
+  background: ${palette.color.brown4};
   width: 70px;
   aspect-ratio: 1;
 
-  color: #fff3db;
-  font-size: 40px;
+  color: ${palette.color.brown1};
+  ${palette.fontSize[40]}
 `;
 
 const bgLight = css`
   padding: 12px;
-  background: #fff3db;
-  border: 2px solid #c39d52;
+  background: ${palette.color.brown1};
+  border: 2px solid ${palette.color.brown4};
 
   > img {
     width: inherit;
