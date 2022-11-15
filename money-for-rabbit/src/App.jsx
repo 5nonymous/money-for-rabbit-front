@@ -17,7 +17,7 @@ function App() {
           <Route path='/' element={<Layout page={<Home />} />} />
           <Route path='/user/:userId/' element={<Layout page={<UserPage />} />} />
           <Route path='/withdrawal/done' element={<Layout page={<Done />} />} />
-          <Route path='/welcome' element={<Layout page={<AuthenticationCompleted />} />} />
+          <Route path='/signup/done' element={<Layout page={<AuthenticationCompleted />} />} />
           <Route path='/*' element={<Layout page={<NotFound />} />} />
         </Routes>
       </BrowserRouter>
