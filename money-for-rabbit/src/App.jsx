@@ -5,6 +5,7 @@ import Layout from './styles/layout/Layout';
 import { css } from '@emotion/react';
 import Home from './pages/home/Home';
 import NotFound from './pages/error/NotFound';
+import Done from './pages/withdrawal/Done';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout page={<Home />} />} />
           <Route path='/*' element={<Layout page={<NotFound />} />} />
+          <Route path="/withdrawal/done" element={<Layout page={<Done />} />} />
         </Routes>
       </BrowserRouter>
     </div>
