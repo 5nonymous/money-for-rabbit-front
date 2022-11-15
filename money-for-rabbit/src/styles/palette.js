@@ -30,10 +30,25 @@ const fontWeight = {
   bolder: 'font-weight: 800',
 };
 
+const flexCenter = `
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const align = {
+  centerRow: flexCenter,
+  centerColumn: `
+    ${flexCenter}
+    flex-direction: column;
+  `,
+};
+
 const palette = {
   color,
   fontSize,
   fontWeight,
+  align,
 };
 
 export default palette;
