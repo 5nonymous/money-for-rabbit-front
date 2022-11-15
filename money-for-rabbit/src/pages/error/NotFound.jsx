@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import palette from '../../styles/palette';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBan, fa4 } from '@fortawesome/free-solid-svg-icons';
+import { fa4 } from '@fortawesome/free-solid-svg-icons';
+import { faFaceFrown } from '@fortawesome/free-regular-svg-icons';
 import TextButton from '../../components/button/TextButton';
 
 function NotFound() {
@@ -15,7 +16,7 @@ function NotFound() {
     <section css={[flexCenterCol, brownText]}>
       <div css={flexIcon}>
         <FontAwesomeIcon icon={fa4} />
-        <FontAwesomeIcon icon={faBan} />
+        <FontAwesomeIcon icon={faFaceFrown} />
         <FontAwesomeIcon icon={fa4} />
       </div>
       <div css={boldText}>이런!</div>
