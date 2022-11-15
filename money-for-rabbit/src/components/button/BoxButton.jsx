@@ -4,12 +4,16 @@ import React from 'react';
 import { css } from '@emotion/react';
 import palette from '../../styles/palette';
 
-function BoxButton({ children, onClick, half, light, user }) {
+function BoxButton({ children, onClick, half, light, user, icon }) {
   const buttonStyles = [boxButtonBase];
 
-  buttonStyles.push(half ? halfWidth : fullWidth);
-  buttonStyles.push(light ? bgLight : bgDark);
-  buttonStyles.push(user && username);
+  if (user || icon) {
+    buttonStyles.push(user && username);
+    buttonStyles.push(icon && squareIcon);
+  } else {
+    buttonStyles.push(half ? halfWidth : fullWidth);
+    buttonStyles.push(light ? bgLight : bgDark);
+  }
 
   return (
     <div css={buttonStyles} onClick={onClick}>
@@ -70,4 +74,12 @@ const bgLight = css`
   background: ${palette.color.white};
   border: 1px solid ${palette.color.brown4};
   color: ${palette.color.brown4};
+`;
+
+const squareIcon = css`
+  width: 70px;
+  height: 70px;
+
+  ${bgDark}
+  ${palette.fontSize[40]}
 `;
