@@ -8,9 +8,9 @@ import palette from './../../styles/palette';
 
 function TextButton({ label, onClick }) {
   return label === '이전' ? (
-    <PrevButton onClick={onClick} />
+    <PrevButton onClick={onClick}>{label}</PrevButton>
   ) : (
-    <MoreButton onClick={onClick} />
+    <MoreButton onClick={onClick}>{label}</MoreButton>
   );
 }
 
@@ -34,14 +34,14 @@ const more = css`
   font-size: 16px;
 `;
 
-const PrevButton = (props) => (
+const PrevButton = ({ children, ...props }) => (
   <div css={prev} {...props}>
-    <FontAwesomeIcon icon={faAngleLeft} /> 이전
+    <FontAwesomeIcon icon={faAngleLeft} /> {children}
   </div>
 );
 
-const MoreButton = (props) => (
+const MoreButton = ({ children, ...props }) => (
   <div css={more} {...props}>
-    더보기 <FontAwesomeIcon icon={faAngleRight} />
+    {children} <FontAwesomeIcon icon={faAngleRight} />
   </div>
 );
