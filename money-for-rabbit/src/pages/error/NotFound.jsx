@@ -3,7 +3,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
-import palette from '../../styles/palette';
+import common from '../../styles/common';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fa4 } from '@fortawesome/free-solid-svg-icons';
 import { faFaceFrown } from '@fortawesome/free-regular-svg-icons';
@@ -21,7 +21,7 @@ function NotFound() {
       </div>
       <div css={boldText}>이런!</div>
       <div css={flexText}>
-        <div css={[palette.fontSize[20]]}>페이지를 찾을 수 없어요.</div>
+        <div css={[common.fontSize[20]]}>페이지를 찾을 수 없어요.</div>
         <TextButton label={'메인으로'} onClick={() => navigate('/')} />
       </div>
     </section>
@@ -44,13 +44,13 @@ const flexCenterCol = css`
 `;
 
 const brownText = css`
-  color: ${palette.color.brown4};
+  color: ${common.color.brown4};
 `;
 
 const flexIcon = css`
   ${flexCenter}
   gap: 10px;
-  ${palette.fontSize[40]}
+  ${common.fontSize[40]}
 `;
 
 const flexText = css`
@@ -60,6 +60,6 @@ const flexText = css`
 `;
 
 const boldText = css`
-  ${palette.fontSize[30]}
-  ${palette.fontWeight.bold}
+  ${common.fontSize[30]}
+  ${common.fontWeight.bold}
 `;
