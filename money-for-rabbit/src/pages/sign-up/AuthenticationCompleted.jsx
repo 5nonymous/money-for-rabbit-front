@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { css } from '@emotion/react';
-import palette from '../../styles/palette';
+import common from '../../styles/common';
 import BoxButton from '../../components/button/BoxButton';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,9 +40,9 @@ const flexCenterColumn = css`
 
 const boldText = css`
   text-align: center;
-  color: ${palette.color.brown4};
-  ${palette.fontSize[30]}
-  ${palette.fontWeight.bold};
+  color: ${common.color.brown4};
+  ${common.fontSize[30]}
+  ${common.fontWeight.bold};
 `;
 
 const text = css`
