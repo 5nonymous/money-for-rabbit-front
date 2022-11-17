@@ -9,6 +9,7 @@ import NotFound from './pages/error/NotFound';
 import Done from './pages/withdrawal/Done';
 import SignUp from './pages/sign-up/SignUp';
 import AuthenticationCompleted from './pages/sign-up/AuthenticationCompleted';
+import SelectMoney from './pages/user-page/SelectMoney';
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout page={<Home />} />} />
           <Route path='/user/:userId/' element={<Layout page={<UserPage />} />} />
-          <Route path='/withdrawal/done' element={<Layout page={<Done />} />} />
+          <Route path='/user/:userId/new' element={<Layout page={<SelectMoney />} />} />
           <Route path='/signup' element={<Layout page={<SignUp />} />} />
           <Route path='/signup/done' element={<Layout page={<AuthenticationCompleted />} />} />
+          <Route path='/withdrawal/done' element={<Layout page={<Done />} />} />
           <Route path='/*' element={<Layout page={<NotFound />} />} />
         </Routes>
       </BrowserRouter>
