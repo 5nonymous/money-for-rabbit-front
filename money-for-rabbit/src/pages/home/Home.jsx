@@ -1,26 +1,37 @@
 /** @jsxImportSource @emotion/react */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { css, keyframes } from '@emotion/react';
 import common from '../../styles/common';
 import Input from '../../components/input/Input';
 import Notion from '../../components/button/Notion';
 import { getBackgroundImage } from '../../utils/getDynamicImage';
+import Modal from '../../components/modal/Modal';
 
 function Home() {
+  const [isModal, setIsModal] = useState(false);
+
+  const openModal = () => {
+    setIsModal(true);
+  };
+
+  const closeModal = () => {
+    setIsModal(!isModal);
+  };
+
   const onClickScreen = (e) => {
-    if (e.target.tagName !== 'P') {
-      // TODO: 링크 수정 필요
-      // 로그인이 되어 있으면 마이페이지
-      // 로그인이 안 되어 있으면 로그인 페이지
-      window.location.href = '/signup';
+    if (e.target === e.currentTarget) {
+      // TODO: 클릭 시 화면전환 수정 필요
+      //     // 로그인이 되어 있으면 마이페이지
+      //     // 로그인이 안 되어 있으면 로그인 모달
+      openModal();
     }
   };
 
   return (
     <div css={wrapper} onClick={onClickScreen}>
-      <svg css={[svgStyle]}>
-        <text css={svgText} x='10' y='40'>
+      <svg css={svgStyle({ isModal })}>
+        <text css={svgText} x="10" y="40">
           화면을 터치하세요
         </text>
       </svg>
@@ -28,6 +39,7 @@ function Home() {
       <div css={notionWrapper}>
         <Notion />
       </div>
+      {isModal && <Modal close={closeModal} type={'signIn'} />}
     </div>
   );
 }
@@ -95,7 +107,7 @@ const wrapper = css`
   background: url(${getBackgroundImage()}) center/cover;
 `;
 
-const svgStyle = css`
+const svgStyle = (props) => css`
   width: 230px;
   height: 50px;
   ${common.fontSize[30]};
@@ -103,7 +115,11 @@ const svgStyle = css`
   position: absolute;
   top: 30px;
   left: 80px;
-  animation: ${bounceAnimation} 2s both infinite;
+  animation: ${props.isModal
+    ? ''
+    : css`
+        ${bounceAnimation} 2s both infinite
+      `};
 `;
 
 const svgText = css`
