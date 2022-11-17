@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css, keyframes } from '@emotion/react';
 import palette from '../../styles/palette';
 import Input from '../../components/input/Input';
@@ -11,16 +11,20 @@ import Modal from '../../components/modal/Modal';
 function Home() {
   const [isModal, setIsModal] = useState(false);
 
-  const handleModal = () => {
+  const openModal = () => {
+    setIsModal(true);
+  };
+
+  const closeModal = () => {
     setIsModal(!isModal);
   };
 
   const onClickScreen = (e) => {
-    if (e.target.tagName !== 'P') {
+    if (e.target === e.currentTarget) {
       // TODO: 클릭 시 화면전환 수정 필요
-      // 로그인이 되어 있으면 마이페이지
-      // 로그인이 안 되어 있으면 로그인 모달
-      handleModal();
+      //     // 로그인이 되어 있으면 마이페이지
+      //     // 로그인이 안 되어 있으면 로그인 모달
+      openModal();
     }
   };
 
@@ -35,7 +39,7 @@ function Home() {
       <div css={notionWrapper}>
         <Notion />
       </div>
-      {isModal && <Modal onClose={handleModal} />}
+      {isModal && <Modal close={closeModal} type={'signIn'} />}
     </div>
   );
 }
