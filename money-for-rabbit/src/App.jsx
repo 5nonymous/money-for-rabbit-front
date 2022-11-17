@@ -7,6 +7,7 @@ import Home from './pages/home/Home';
 import UserPage from './pages/user-page/UserPage';
 import NotFound from './pages/error/NotFound';
 import Done from './pages/withdrawal/Done';
+import AuthenticationCompleted from './pages/sign-up/AuthenticationCompleted';
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout page={<Home />} />} />
           <Route path='/user/:userId/' element={<Layout page={<UserPage />} />} />
+          <Route path='/withdrawal/done' element={<Layout page={<Done />} />} />
+          <Route path='/signup/done' element={<Layout page={<AuthenticationCompleted />} />} />
           <Route path='/*' element={<Layout page={<NotFound />} />} />
-          <Route path="/withdrawal/done" element={<Layout page={<Done />} />} />
         </Routes>
       </BrowserRouter>
     </div>
