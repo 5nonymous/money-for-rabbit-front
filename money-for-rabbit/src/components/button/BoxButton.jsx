@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { css } from '@emotion/react';
-import palette from '../../styles/palette';
+import common from '../../styles/common';
 
 function BoxButton({ children, type, onClick, half, light, user, icon }) {
   const buttonStyles = [boxButtonBase];
@@ -44,37 +44,37 @@ const boxButtonBase = css`
 `;
 
 const username = css`
-  background: ${palette.color.brown1};
+  background: ${common.color.brown1};
   padding: 17px 20px;
   width: fit-content;
   height: fit-content;
 
-  color: ${palette.color.brown4};
-  ${palette.fontSize[30]}
-  ${palette.fontWeight.semiBold}
+  color: ${common.color.brown4};
+  ${common.fontSize[30]}
+  ${common.fontWeight.semiBold}
 `;
 
 const fullWidth = css`
   width: 310px;
   height: 64px;
-  ${palette.fontSize[24]}
+  ${common.fontSize[24]}
 `;
 
 const halfWidth = css`
   width: 42.5%;
   padding: 15px 0;
-  ${palette.fontSize[18]}
+  ${common.fontSize[18]}
 `;
 
 const bgDark = css`
-  background: ${palette.color.brown4};
-  color: ${palette.color.brown1};
+  background: ${common.color.brown4};
+  color: ${common.color.brown1};
 `;
 
 const bgLight = css`
-  background: ${palette.color.white};
-  border: 1px solid ${palette.color.brown4};
-  color: ${palette.color.brown4};
+  background: ${common.color.white};
+  border: 1px solid ${common.color.brown4};
+  color: ${common.color.brown4};
 `;
 
 const squareIcon = css`
@@ -82,5 +82,5 @@ const squareIcon = css`
   height: 70px;
 
   ${bgDark}
-  ${palette.fontSize[40]}
+  ${common.fontSize[40]}
 `;

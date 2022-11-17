@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { css, keyframes } from '@emotion/react';
-import palette from '../../styles/palette';
+import common from '../../styles/common';
 import Input from '../../components/input/Input';
 import Notion from '../../components/button/Notion';
 import { getBackgroundImage } from '../../utils/getDynamicImage';
@@ -110,8 +110,8 @@ const wrapper = css`
 const svgStyle = (props) => css`
   width: 230px;
   height: 50px;
-  ${palette.fontSize[30]};
-  ${palette.fontWeight.bolder};
+  ${common.fontSize[30]};
+  ${common.fontWeight.bolder};
   position: absolute;
   top: 30px;
   left: 80px;
@@ -123,8 +123,8 @@ const svgStyle = (props) => css`
 `;
 
 const svgText = css`
-  fill: ${palette.color.brown3};
-  stroke: ${palette.color.white};
+  fill: ${common.color.brown3};
+  stroke: ${common.color.white};
   stroke-width: 10px;
   stroke-linejoin: round;
   paint-order: stroke;
@@ -136,8 +136,7 @@ const rabbit = css`
   position: absolute;
   left: 47px;
   bottom: 60px;
-  background: url('./images/Rabbit_NoBackground_Default3.png') center/cover
-    no-repeat;
+  background: url('./images/Rabbit_NoBackground_Default3.png') center/cover no-repeat;
 `;
 
 const notionWrapper = css`

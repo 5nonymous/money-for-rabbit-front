@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { css } from '@emotion/react';
-import palette from '../../styles/palette';
+import common from '../../styles/common';
 
 function Done() {
   return (
@@ -28,19 +28,19 @@ const wrapper = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: ${palette.color.brown4};
+  color: ${common.color.brown4};
 
   div {
     text-align: center;
     p {
-      ${palette.fontWeight.bold};
-      ${palette.fontSize[30]};
+      ${common.fontWeight.bold};
+      ${common.fontSize[30]};
       :first-child {
         margin-bottom: 20px;
       }
     }
     :nth-of-type(2) p {
-      ${palette.fontSize[20]};
+      ${common.fontSize[20]};
       :first-child {
         margin-top: 35px;
       }

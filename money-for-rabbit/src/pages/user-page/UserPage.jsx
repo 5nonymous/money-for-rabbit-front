@@ -3,14 +3,15 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import palette from '../../styles/palette';
-import { useParams } from 'react-router-dom';
+import common from '../../styles/common';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getBackgroundImage, getRabbitImage } from '../../utils/getDynamicImage';
 
 function UserPage() {
   const username = '어쩌구';
   const money = 1234;
 
+  const navigate = useNavigate();
   const { userId } = useParams();
   const currentUserId = '1';
   const collectedMoney = money.toLocaleString('ko-KR');
@@ -18,7 +19,7 @@ function UserPage() {
 
   function handleClick() {
     if (isOthersPage) {
-      console.log('금액 선택 페이지로 이동합니다.');
+      navigate(`/user/${userId}/new`);
     } else {
       console.log('받은 쪽지 열람 페이지로 이동합니다.');
     }
@@ -60,8 +61,8 @@ const wrapper = css`
   justify-content: space-between;
   flex-direction: column;
 
-  ${palette.fontSize[20]}
-  ${palette.fontWeight.bold};
+  ${common.fontSize[20]}
+  ${common.fontWeight.bold};
 
   user-select: none;
 `;
@@ -70,11 +71,11 @@ const introText = css`
   padding: 37px 14px;
   width: 100%;
 
-  color: ${palette.color.brown4};
+  color: ${common.color.brown4};
 
   // collected money
   & > div:last-child > span {
-    color: ${palette.color.brown5};
+    color: ${common.color.brown5};
   }
 `;
 

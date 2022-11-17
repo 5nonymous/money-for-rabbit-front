@@ -3,7 +3,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
-import palette from '../../styles/palette';
+import common from '../../styles/common';
 import Input from '../../components/input/Input';
 import BoxButton from '../../components/button/BoxButton';
 import Notion from '../../components/button/Notion';
@@ -72,21 +72,21 @@ const flexCenterCol = (gap) => css`
 
 const wrapper = css`
   height: 100%;
-  color: ${palette.color.brown4};
+  color: ${common.color.brown4};
 `;
 
 const boldText = css`
-  ${palette.fontSize[40]}
-  ${palette.fontWeight.bold}
+  ${common.fontSize[40]}
+  ${common.fontWeight.bold}
 `;
 
 const regularText = (size) => css`
-  ${palette.fontSize[size]}
-  ${palette.fontWeight.midium}
+  ${common.fontSize[size]}
+  ${common.fontWeight.midium}
 `;
 
 const lineStyle = css`
-  background: ${palette.color.brown2};
+  background: ${common.color.brown2};
   width: 310px;
   height: 3px;
 `;
