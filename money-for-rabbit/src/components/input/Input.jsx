@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { css } from '@emotion/react';
+import palette from '../../styles/palette';
 
 function Input({ type, style, placeholder }) {
   const inputStyle = {
@@ -29,27 +30,27 @@ const sign = css`
   width: 310px;
   height: 64px;
   border-radius: 15px;
-  background-color: #fff3db;
-  font-size: 20px;
-  color: #c39d52;
+  background-color: ${palette.color.brown1};
+  ${palette.fontSize[20]};
+  color: ${palette.color.brown4};
   padding: 21px 15px;
 
   ::placeholder {
-    color: #c39d52;
+    color: ${palette.color.brown4};
   }
 `;
 
 const editNickname = css`
   ${defaultStyle}
   width: 180px;
-  border-bottom: 2px solid #fff3db;
+  border-bottom: 2px solid ${palette.color.brown1};
   padding-bottom: 16px;
-  font-size: 18px;
-  color: #ecd189;
+  ${palette.fontSize[18]};
+  color: ${palette.color.brown3};
   text-align: center;
 
   ::placeholder {
-    color: #ecd189;
+    color: ${palette.color.brown3};
   }
 `;
 
@@ -57,12 +58,12 @@ const price = css`
   ${defaultStyle}
   width: 300px;
   height: 45px;
-  background-color: #fff3db;
-  font-size: 18px;
-  color: #c39d52;
+  background-color: ${palette.color.brown1};
+  ${palette.fontSize[18]};
+  color: ${palette.color.brown4};
   text-align: center;
 
   ::placeholder {
-    color: #c39d52;
+    color: ${palette.color.brown4};
   }
 `;

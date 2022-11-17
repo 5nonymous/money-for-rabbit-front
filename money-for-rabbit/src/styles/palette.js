@@ -24,7 +24,7 @@ const fontSize = {
 };
 
 const fontWeight = {
-  midium: 'font-weight: 400;',
+  medium: 'font-weight: 400;',
   semiBold: 'font-weight: 600;',
   bold: 'font-weight: 700;',
 };

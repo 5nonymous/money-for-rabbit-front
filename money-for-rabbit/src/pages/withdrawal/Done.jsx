@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { css } from '@emotion/react';
+import palette from '../../styles/palette';
 
 function Done() {
   return (
@@ -27,19 +28,19 @@ const wrapper = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #c39d52;
+  color: ${palette.color.brown4};
 
   div {
     text-align: center;
     p {
-      font-weight: 700;
-      font-size: 30px;
+      ${palette.fontWeight.bold};
+      ${palette.fontSize[30]};
       :first-child {
         margin-bottom: 20px;
       }
     }
     :nth-of-type(2) p {
-      font-size: 20px;
+      ${palette.fontSize[20]};
       :first-child {
         margin-top: 35px;
       }
