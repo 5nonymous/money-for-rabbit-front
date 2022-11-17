@@ -16,7 +16,7 @@ code {
   box-sizing: border-box;
 }
 
-p {
+p,
+h1 {
   margin: 0;
 }
-
