@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { css } from '@emotion/react';
-import palette from '../../styles/palette';
+import common from '../../styles/common';
 import Input from '../input/Input';
 import BoxButton from '../button/BoxButton';
 import Notion from '../button/Notion';
@@ -108,7 +108,7 @@ const wrapper = (props) => css`
   ${flexCenter};
   width: ${props.type === 'signIn' ? '361px' : '300px'};
   height: fit-content;
-  background-color: ${palette.color.white};
+  background-color: ${common.color.white};
   border-radius: 20px;
   padding-top: 32px;
   padding-bottom: 14px;
@@ -117,9 +117,9 @@ const wrapper = (props) => css`
   cursor: default;
 
   p {
-    ${palette.fontWeight.medium};
-    ${palette.fontSize[20]};
-    color: ${palette.color.brown4};
+    ${common.fontWeight.medium};
+    ${common.fontSize[20]};
+    color: ${common.color.brown4};
   }
 `;
 
@@ -127,7 +127,7 @@ const signIn = css`
   ${flexCenter};
   gap: 32px;
   padding-bottom: 32px;
-  border-bottom: 3px solid ${palette.color.brown3};
+  border-bottom: 3px solid ${common.color.brown3};
 `;
 
 const signUp = css`
@@ -144,9 +144,9 @@ const inputWrapper = css`
   margin-bottom: 48px;
 
   span {
-    color: ${palette.color.brown4};
-    ${palette.fontSize[18]};
-    ${palette.fontWeight.medium};
+    color: ${common.color.brown4};
+    ${common.fontSize[18]};
+    ${common.fontWeight.medium};
     cursor: pointer;
   }
 `;
