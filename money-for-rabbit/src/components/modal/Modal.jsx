@@ -56,11 +56,7 @@ function Modal({ close, type }) {
   const Profile = (
     <div css={wrapper({ type })}>
       <div css={inputWrapper}>
-        <Input
-          type={'text'}
-          style={'editNickname'}
-          placeholder={'닉네임 입력'}
-        />
+        <Input type={'text'} style={'nickname'} placeholder={'닉네임 입력'} />
         <span onClick={onClickNicknameHandler}>변경</span>
       </div>
       <div css={buttonWrapper}>
