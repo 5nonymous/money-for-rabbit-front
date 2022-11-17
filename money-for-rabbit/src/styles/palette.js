@@ -27,6 +27,7 @@ const fontWeight = {
   medium: 'font-weight: 400;',
   semiBold: 'font-weight: 600;',
   bold: 'font-weight: 700;',
+  bolder: 'font-weight: 800',
 };
 
 const palette = {
