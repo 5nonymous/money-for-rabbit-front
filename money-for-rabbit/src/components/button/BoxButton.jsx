@@ -4,7 +4,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 import palette from '../../styles/palette';
 
-function BoxButton({ children, onClick, half, light, user, icon }) {
+function BoxButton({ children, type, onClick, half, light, user, icon }) {
   const buttonStyles = [boxButtonBase];
 
   if (user || icon) {
@@ -16,9 +16,9 @@ function BoxButton({ children, onClick, half, light, user, icon }) {
   }
 
   return (
-    <div css={buttonStyles} onClick={onClick}>
+    <button type={type} css={buttonStyles} onClick={onClick}>
       {children}
-    </div>
+    </button>
   );
 }
 
@@ -29,6 +29,7 @@ const boxButtonBase = css`
   align-items: center;
   justify-content: center;
 
+  border: 0;
   border-radius: 15px;
   font-weight: 400;
 
@@ -54,8 +55,8 @@ const username = css`
 `;
 
 const fullWidth = css`
-  width: 85%;
-  padding: 20px 0;
+  width: 310px;
+  height: 64px;
   ${palette.fontSize[24]}
 `;
 
