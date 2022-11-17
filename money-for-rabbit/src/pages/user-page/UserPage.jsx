@@ -4,13 +4,14 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import common from '../../styles/common';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getBackgroundImage, getRabbitImage } from '../../utils/getDynamicImage';
 
 function UserPage() {
   const username = '어쩌구';
   const money = 1234;
 
+  const navigate = useNavigate();
   const { userId } = useParams();
   const currentUserId = '1';
   const collectedMoney = money.toLocaleString('ko-KR');
@@ -18,7 +19,7 @@ function UserPage() {
 
   function handleClick() {
     if (isOthersPage) {
-      console.log('금액 선택 페이지로 이동합니다.');
+      navigate(`/user/${userId}/new`);
     } else {
       console.log('받은 쪽지 열람 페이지로 이동합니다.');
     }
