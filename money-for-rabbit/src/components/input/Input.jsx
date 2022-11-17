@@ -7,10 +7,15 @@ import common from '../../styles/common';
 function Input({ type, style, placeholder }) {
   const inputStyle = {
     sign,
-    editNickname,
+    nickname,
     price,
   };
-  return <input type={type} css={inputStyle[style]} placeholder={placeholder}></input>;
+  return (
+    <input
+      type={type}
+      css={inputStyle[style]}
+      placeholder={placeholder}></input>
+  );
 }
 
 export default Input;
@@ -35,7 +40,7 @@ const sign = css`
   }
 `;
 
-const editNickname = css`
+const nickname = css`
   ${defaultStyle}
   width: 180px;
   border-bottom: 2px solid ${common.color.brown1};
