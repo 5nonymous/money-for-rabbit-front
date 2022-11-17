@@ -5,32 +5,7 @@ import { css, keyframes } from '@emotion/react';
 import palette from '../../styles/palette';
 import Input from '../../components/input/Input';
 import Notion from '../../components/button/Notion';
-
-const getHours = () => {
-  const now = new Date();
-  const hours = now.getHours();
-
-  // const test = new Date(2022, 11, 15, 19, 39, 20);
-  // const hours = test.getHours();
-  return hours;
-};
-
-/**
- * 07 ~ 16 : afternoon
- * 17 ~ 18 : dusk
- * 19 ~ 06 : night
- */
-const getBackgroundImage = (hours) => {
-  if (7 <= hours && hours <= 16) {
-    return './images/Background:Afternoon.jpeg';
-  } else if (17 <= hours && hours <= 18) {
-    return './images/Background:Dusk.jpeg';
-  } else {
-    return './images/Background:Night.jpeg';
-  }
-};
-
-const backgroundImage = getBackgroundImage(getHours());
+import { getBackgroundImage } from '../../utils/getDynamicImage';
 
 function Home() {
   const onClickScreen = (e) => {
@@ -117,7 +92,7 @@ const wrapper = css`
   height: 100%;
   position: relative;
   cursor: pointer;
-  background: url(${backgroundImage}) center/cover;
+  background: url(${getBackgroundImage()}) center/cover;
 `;
 
 const svgStyle = css`
