@@ -11,7 +11,7 @@ function Box({ size, writer, priceImg }) {
   return (
     <div css={wrapper}>
       <div css={priceImgWrapper}>{priceImg}</div>
-      {writer}
+      {writer} 님
       <div css={textButtonWrapper}>
         <TextButton label={'더보기'} />
       </div>
