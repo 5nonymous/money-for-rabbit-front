@@ -11,6 +11,7 @@ import Done from './pages/withdrawal/Done';
 import SignUp from './pages/sign-up/SignUp';
 import AuthenticationCompleted from './pages/sign-up/AuthenticationCompleted';
 import SelectMoney from './pages/user-page/SelectMoney';
+import LetterList from './pages/letter/LetterList';
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
           <Route
             path="/user/:userId/new"
             element={<Layout page={<SelectMoney />} />}
+          />
+          <Route
+            path="/user/:userId/letters"
+            element={<Layout page={<LetterList />} />}
           />
           <Route path="/signup" element={<Layout page={<SignUp />} />} />
           <Route
