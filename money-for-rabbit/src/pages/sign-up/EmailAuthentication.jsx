@@ -1,12 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import common from '../../styles/common';
 import BoxButton from '../../components/button/BoxButton';
-import { useEffect } from 'react';
-import { useState } from 'react';
 
 function EmailAuthentication() {
   const navigate = useNavigate();
@@ -54,9 +52,7 @@ function EmailAuthentication() {
         <BoxButton onClick={() => navigate('/')}>메인으로 가기</BoxButton>
       </div>
     );
-  } else {
-    return <></>;
-  }
+  } else return <></>;
 }
 
 export default EmailAuthentication;
