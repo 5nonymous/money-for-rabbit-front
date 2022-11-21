@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { css } from '@emotion/react';
 import common from '../../styles/common';
@@ -11,7 +11,7 @@ function WriteMessage() {
   const navigate = useNavigate();
   const { userId } = useParams();
   const location = useLocation();
-  const selectedMoney = location.state.money;
+  const [selectedMoney, setSelectedMoney] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,20 +29,30 @@ function WriteMessage() {
     }
   };
 
-  return (
-    <div css={wrapper}>
-      <PrevButton onClick={() => navigate(-1)} />
+  useEffect(() => {
+    if (location.state) {
+      setSelectedMoney(location.state.money);
+    } else {
+      navigate(-1);
+    }
+  }, [navigate, location]);
 
-      <form css={inputWrapper} onSubmit={handleSubmit}>
-        <div>
-          <p css={label}>덕담을 남겨주세요</p>
-          <textarea css={messageInput} />
-        </div>
+  if (selectedMoney) {
+    return (
+      <div css={wrapper}>
+        <PrevButton onClick={() => navigate(-1)} />
 
-        <BoxButton type={'submit'}>완료</BoxButton>
-      </form>
-    </div>
-  );
+        <form css={inputWrapper} onSubmit={handleSubmit}>
+          <div>
+            <p css={label}>덕담을 남겨주세요</p>
+            <textarea css={messageInput} />
+          </div>
+
+          <BoxButton type={'submit'}>완료</BoxButton>
+        </form>
+      </div>
+    );
+  } else return <></>;
 }
 
 export default WriteMessage;
