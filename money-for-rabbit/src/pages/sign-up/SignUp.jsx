@@ -20,8 +20,7 @@ function SignUp() {
     keys.map((key, id) => (data[key] = e.target[id].value));
 
     if (data.password1 === data.password2) {
-      alert('다음페이지 이동');
-      navigate('/signup/verification', { state: { data: data } });
+      navigate('/signup/welcome', { state: { data: data } });
     } else {
       alert('비밀번호가 일치하지 않습니다.');
     }
