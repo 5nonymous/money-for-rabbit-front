@@ -3,6 +3,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
+import axios from 'axios';
 import common from '../../styles/common';
 import Input from '../../components/input/Input';
 import BoxButton from '../../components/button/BoxButton';
@@ -14,13 +15,21 @@ function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const keys = ['email', 'nickname', 'password1', 'password2'];
+    const keys = ['email', 'username', 'password', 'passwordCheck'];
     let data = {};
 
     keys.map((key, id) => (data[key] = e.target[id].value));
 
-    if (data.password1 === data.password2) {
-      navigate('/signup/welcome', { state: { data: data } });
+    if (data.password === data.passwordCheck) {
+      delete data.passwordCheck;
+
+      axios
+        .post('http://tgoddessana.pythonanywhere.com/api/user/register', data)
+        .then((response) => {
+          console.log(response);
+          navigate('/signup/welcome', { state: { data: data } });
+        })
+        .catch(() => alert('올바른 이메일을 입력해주세요.'));
     } else {
       alert('비밀번호가 일치하지 않습니다.');
     }
