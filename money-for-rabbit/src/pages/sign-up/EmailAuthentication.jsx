@@ -27,7 +27,7 @@ function EmailAuthentication() {
     return (
       <div css={wrapper}>
         <h1>
-          {userData.nickname} 님,
+          {userData.username} 님,
           <br />
           회원가입을 환영합니다!
         </h1>
