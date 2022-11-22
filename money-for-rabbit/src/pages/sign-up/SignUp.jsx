@@ -26,7 +26,6 @@ function SignUp() {
       axios
         .post('http://tgoddessana.pythonanywhere.com/api/user/register', data)
         .then((response) => {
-          console.log(response);
           navigate('/signup/welcome', { state: { data: data } });
         })
         .catch(() => alert('올바른 이메일을 입력해주세요.'));
