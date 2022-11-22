@@ -12,5 +12,5 @@ export default Layout;
 const wrapper = css`
   width: 390px;
   height: 100vh;
-  background-color: blue;
+  /* background-color: blue; */
 `;

@@ -44,6 +44,7 @@ function SelectMoney() {
       choice = selectedMoney;
     }
 
+    navigate(`/user/${userId}/new/message`, { state: { money: choice } });
     console.log(`${choice}원 선택, ${userId}에게 전달할 쪽지 작성 페이지로 이동`);
   };
 

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import common from '../../styles/common';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getBackgroundImage, getRabbitImage } from '../../utils/getDynamicImage';
+import Modal from '../../components/modal/Modal';
 
 function UserPage() {
   const username = '어쩌구';
@@ -16,6 +17,7 @@ function UserPage() {
   const currentUserId = '1';
   const collectedMoney = money.toLocaleString('ko-KR');
   const [isOthersPage, setIsOthersPage] = useState(userId !== currentUserId);
+  const [modal, setModal] = useState(false);
 
   function handleClick() {
     if (isOthersPage) {
@@ -28,7 +30,15 @@ function UserPage() {
   return (
     <div css={wrapper}>
       <div css={introText}>
-        <div>{isOthersPage ? <span>{username} 님은</span> : <span>{username} 님</span>}</div>
+        <div>
+          {isOthersPage ? (
+            <span>{username} 님은</span>
+          ) : (
+            <div css={userSettingBtn}>
+              <span onClick={() => setModal(true)}>{username}</span> 님
+            </div>
+          )}
+        </div>
         <div>
           <span>{collectedMoney}</span> 원{isOthersPage ? '을 모았어요.' : '이 모였어요.'}
         </div>
@@ -44,6 +54,8 @@ function UserPage() {
           {isOthersPage ? ' 쪽지를 전달하세요.' : ' 받은 쪽지를 확인해보세요.'}
         </div>
       </div>
+
+      {modal && <Modal type={'profile'} close={() => setModal(false)} />}
     </div>
   );
 }
@@ -76,6 +88,25 @@ const introText = css`
   // collected money
   & > div:last-child > span {
     color: ${common.color.brown5};
+  }
+`;
+
+const userSettingBtn = css`
+  margin-bottom: 7px;
+  margin-left: -7px;
+
+  span {
+    padding: 5px;
+    border: 1px solid ${common.color.brown4};
+    border-radius: 10px;
+
+    transition: ease-in background 0.2s;
+
+    cursor: pointer;
+
+    :hover {
+      background: ${common.color.brown1};
+    }
   }
 `;
 

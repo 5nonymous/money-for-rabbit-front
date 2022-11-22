@@ -108,7 +108,7 @@ const wrapper = css`
 `;
 
 const svgStyle = (props) => css`
-  width: 230px;
+  width: 280px;
   height: 50px;
   ${common.fontSize[30]};
   ${common.fontWeight.bolder};
@@ -136,7 +136,8 @@ const rabbit = css`
   position: absolute;
   left: 47px;
   bottom: 60px;
-  background: url('./images/Rabbit_NoBackground_Default3.png') center/cover no-repeat;
+  background: url('./images/Rabbit_NoBackground_Default3.png') center/cover
+    no-repeat;
 `;
 
 const notionWrapper = css`

@@ -11,6 +11,8 @@ import Done from './pages/withdrawal/Done';
 import SignUp from './pages/sign-up/SignUp';
 import AuthenticationCompleted from './pages/sign-up/AuthenticationCompleted';
 import SelectMoney from './pages/user-page/SelectMoney';
+import EmailAuthentication from './pages/sign-up/EmailAuthentication';
+import WriteMessage from './pages/user-page/WriteMessage';
 import LetterList from './pages/letter/LetterList';
 
 function App() {
@@ -28,10 +30,18 @@ function App() {
             element={<Layout page={<SelectMoney />} />}
           />
           <Route
+            path="/user/:userId/new/message"
+            element={<Layout page={<WriteMessage />} />}
+          />
+          <Route
             path="/user/:userId/letters"
             element={<Layout page={<LetterList />} />}
           />
           <Route path="/signup" element={<Layout page={<SignUp />} />} />
+          <Route
+            path="/signup/welcome"
+            element={<Layout page={<EmailAuthentication />} />}
+          />
           <Route
             path="/signup/done"
             element={<Layout page={<AuthenticationCompleted />} />}
