@@ -37,14 +37,16 @@ function SelectMoney() {
 
   const toNextPage = () => {
     let choice = formRef.current[0].value;
+    let isMoneyBag = false;
 
     if (selectedMoney === 99999) {
+      isMoneyBag = true;
       if (!checkMoney(choice)) return;
     } else {
       choice = selectedMoney;
     }
 
-    navigate(`/user/${userId}/new/message`, { state: { money: choice } });
+    navigate(`/user/${userId}/new/message`, { state: { money: choice, isMoneyBag: isMoneyBag } });
     console.log(`${choice}원 선택, ${userId}에게 전달할 쪽지 작성 페이지로 이동`);
   };
 
