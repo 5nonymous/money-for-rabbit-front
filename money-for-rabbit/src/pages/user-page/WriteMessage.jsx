@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { css } from '@emotion/react';
-import axios from 'axios';
+import commonAxios from '../../lib/commonAxios';
 import common from '../../styles/common';
 import TextButton from '../../components/button/TextButton';
 import BoxButton from '../../components/button/BoxButton';
@@ -20,11 +20,16 @@ function WriteMessage() {
     const inputMessage = e.target[0].value;
 
     if (inputMessage) {
-      const data = { message: inputMessage, amount: +selectedMoney, is_moneybag: isMoneyBag, nickname: '어쩌구' };
+      const data = {
+        message: inputMessage,
+        amount: +selectedMoney,
+        is_moneybag: isMoneyBag,
+      };
 
-      axios
-        .post(`http://tgoddessana.pythonanywhere.com/api/user/${userId}/messages`, data)
-        .then((response) => console.log(response));
+      commonAxios
+        .post(`user/${userId}/messages`, data)
+        .then((response) => console.log(response))
+        .catch(alert('쪽지를 보낼 수 없습니다.'));
 
       console.log('data: ', data);
       console.log(`${userId}의 페이지로 이동`);
