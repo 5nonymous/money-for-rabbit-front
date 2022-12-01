@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { css } from '@emotion/react';
-import commonAxios from '../../lib/commonAxios';
+import commonAxios from '../../utils/commonAxios';
 import common from '../../styles/common';
 import TextButton from '../../components/button/TextButton';
 import BoxButton from '../../components/button/BoxButton';
