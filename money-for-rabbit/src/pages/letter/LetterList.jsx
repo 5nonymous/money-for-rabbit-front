@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { css } from '@emotion/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import common from '../../styles/common';
 import TextButton from '../../components/button/TextButton';
 import Box from './Box';
@@ -18,12 +20,20 @@ function LetterList() {
       <h1>{userName} 님이 받은 세뱃돈 입니다.</h1>
       <div css={lettersWrapper}>
         {dummyData.map((el) => {
-          // TODO: 정확한 데이터 형식에 맞게 수정해야 함
-          return <Box size={'small'} writer={el.writer} />;
+          return (
+            <Box
+              key={el.id}
+              size={'small'}
+              writer={el.writer}
+              priceImg={el.image}
+            />
+          );
         })}
       </div>
-      {/* TODO: pagination 방식에 대해 논의 후 코드 작성 필요 */}
-      <div css={pagination} />
+      <div css={paginationWrapper}>
+        <FontAwesomeIcon icon={faAngleLeft} />1
+        <FontAwesomeIcon icon={faAngleRight} />
+      </div>
     </div>
   );
 }
@@ -62,10 +72,15 @@ const lettersWrapper = css`
   }
 `;
 
-const pagination = css`
-  width: 99px;
-  height: 44px;
-  background-color: red;
+const paginationWrapper = css`
   position: absolute;
   bottom: 49px;
+  ${common.align.centerRow};
+  gap: 5px;
+  ${common.fontSize[40]};
+  color: ${common.color.brown3};
+
+  svg {
+    cursor: pointer;
+  }
 `;
