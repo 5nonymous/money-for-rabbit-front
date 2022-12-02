@@ -55,4 +55,29 @@ const getRabbitImage = (money) => {
   return imagePath;
 };
 
-export { getBackgroundImage, getRabbitImage };
+const getMoneyImage = (ImageName) => {
+  let money = ImageName.split('_');
+  money = money[1].split('.')[0];
+
+  const size = {
+    100: [48, 47],
+    500: [45, 54],
+    1000: [86, 59],
+    5000: [90, 81],
+    10000: [90, 70],
+    50000: [100, 71],
+    99999: [110, 87],
+  };
+
+  const result = `
+    position: absolute;
+    top: calc(${size[money][1]}px / -2);
+    width: ${size[money][0]}px;
+    height: ${size[money][1]}px;
+    background: url('/images/${ImageName}') center/cover no-repeat;
+  `;
+
+  return result;
+};
+
+export { getBackgroundImage, getRabbitImage, getMoneyImage };

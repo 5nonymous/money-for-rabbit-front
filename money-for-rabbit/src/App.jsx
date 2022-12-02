@@ -13,22 +13,45 @@ import AuthenticationCompleted from './pages/sign-up/AuthenticationCompleted';
 import SelectMoney from './pages/user-page/SelectMoney';
 import EmailAuthentication from './pages/sign-up/EmailAuthentication';
 import WriteMessage from './pages/user-page/WriteMessage';
+import LetterList from './pages/letter/LetterList';
 
 function App() {
   return (
     <div css={wrapper}>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Layout page={<Home />} />} />
-          <Route path='/user/:userId/' element={<Layout page={<UserPage />} />} />
-          <Route path='/user/:userId/new' element={<Layout page={<SelectMoney />} />} />
-          <Route path='/user/:userId/new/message' element={<Layout page={<WriteMessage />} />} />
-          <Route path='/signup' element={<Layout page={<SignUp />} />} />
-          <Route path='/signup/welcome' element={<Layout page={<EmailAuthentication />} />} />
-          <Route path='/signup/done' element={<Layout page={<AuthenticationCompleted />} />} />
-          <Route path='/withdrawal' element={<Layout page={<Withdrawal />} />} />
-          <Route path='/withdrawal/done' element={<Layout page={<Done />} />} />
-          <Route path='/*' element={<Layout page={<NotFound />} />} />
+          <Route path="/" element={<Layout page={<Home />} />} />
+          <Route
+            path="/user/:userId/"
+            element={<Layout page={<UserPage />} />}
+          />
+          <Route
+            path="/user/:userId/new"
+            element={<Layout page={<SelectMoney />} />}
+          />
+          <Route
+            path="/user/:userId/new/message"
+            element={<Layout page={<WriteMessage />} />}
+          />
+          <Route
+            path="/user/:userId/letters"
+            element={<Layout page={<LetterList />} />}
+          />
+          <Route path="/signup" element={<Layout page={<SignUp />} />} />
+          <Route
+            path="/signup/welcome"
+            element={<Layout page={<EmailAuthentication />} />}
+          />
+          <Route
+            path="/signup/done"
+            element={<Layout page={<AuthenticationCompleted />} />}
+          />
+          <Route
+            path="/withdrawal"
+            element={<Layout page={<Withdrawal />} />}
+          />
+          <Route path="/withdrawal/done" element={<Layout page={<Done />} />} />
+          <Route path="/*" element={<Layout page={<NotFound />} />} />
         </Routes>
       </BrowserRouter>
     </div>
