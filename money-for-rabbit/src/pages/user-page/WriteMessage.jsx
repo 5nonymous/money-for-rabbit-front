@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { css } from '@emotion/react';
+import commonAxios from '../../utils/commonAxios';
 import common from '../../styles/common';
 import TextButton from '../../components/button/TextButton';
 import BoxButton from '../../components/button/BoxButton';
@@ -12,13 +13,23 @@ function WriteMessage() {
   const { userId } = useParams();
   const location = useLocation();
   const [selectedMoney, setSelectedMoney] = useState();
+  const [isMoneyBag, setIsMoneyBag] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const inputMessage = e.target[0].value;
 
     if (inputMessage) {
-      const data = { money: +selectedMoney, message: inputMessage };
+      const data = {
+        message: inputMessage,
+        amount: +selectedMoney,
+        is_moneybag: isMoneyBag,
+      };
+
+      commonAxios
+        .post(`user/${userId}/messages`, data)
+        .then((response) => console.log(response))
+        .catch(alert('쪽지를 보낼 수 없습니다.'));
 
       console.log('data: ', data);
       console.log(`${userId}의 페이지로 이동`);
@@ -32,6 +43,7 @@ function WriteMessage() {
   useEffect(() => {
     if (location.state) {
       setSelectedMoney(location.state.money);
+      setIsMoneyBag(location.state.isMoneyBag);
     } else {
       navigate(-1);
     }
