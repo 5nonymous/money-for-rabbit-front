@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { css, keyframes } from '@emotion/react';
 import common from '../../styles/common';
-import Input from '../../components/input/Input';
 import Notion from '../../components/button/Notion';
 import { getBackgroundImage } from '../../utils/getDynamicImage';
 import Modal from '../../components/modal/Modal';
