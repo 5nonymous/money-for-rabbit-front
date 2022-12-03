@@ -115,16 +115,21 @@ const userSettingBtn = css`
 const rabbitImage = (money) => css`
   background: url(${getRabbitImage(money)}) no-repeat center/contain;
   width: 322px;
-  height: 573px;
+  height: 100%;
+  max-height: 573px;
+`;
+
+const bottomText = css`
+  width: 100%;
+  padding: 13px 0;
 
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-`;
 
-const bottomText = css`
-  padding: 13px 0;
+  text-align: center;
+
   z-index: 1;
 `;
 
