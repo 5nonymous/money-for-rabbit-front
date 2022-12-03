@@ -85,6 +85,8 @@ const introText = css`
 
   color: ${common.color.brown4};
 
+  z-index: 1;
+
   // collected money
   & > div:last-child > span {
     color: ${common.color.brown5};
