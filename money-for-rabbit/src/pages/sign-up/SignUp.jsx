@@ -28,7 +28,11 @@ function SignUp() {
         .then((response) => {
           navigate('/signup/welcome', { state: { data: data } });
         })
-        .catch(() => alert('올바른 이메일을 입력해주세요.'));
+        .catch((err) => {
+          let errorMessage = err.response.data;
+
+          alert(errorMessage['Bad Request']);
+        });
     } else {
       alert('비밀번호가 일치하지 않습니다.');
     }
