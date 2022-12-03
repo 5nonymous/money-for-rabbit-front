@@ -134,12 +134,30 @@ const bottomText = css`
 `;
 
 const invisibleButton = css`
-  width: 230px;
-  height: 210px;
+  @media (min-height: 500px) {
+    width: 31vh;
+    height: 28%;
+  }
+
+  @media (min-height: 600px) {
+    width: 32vh;
+    height: 30%;
+  }
+
+  @media (min-height: 700px) {
+    width: 230px;
+    height: 210px;
+  }
+
+  width: 30vh;
+  height: 25%;
 
   position: absolute;
   bottom: 25px;
-  left: 40px;
+  left: 45%;
+  transform: translateX(-45%);
+
+  border: 2px solid red;
 
   cursor: pointer;
 `;
