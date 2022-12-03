@@ -157,7 +157,5 @@ const invisibleButton = css`
   left: 45%;
   transform: translateX(-45%);
 
-  border: 2px solid red;
-
   cursor: pointer;
 `;
