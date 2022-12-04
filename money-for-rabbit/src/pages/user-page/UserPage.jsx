@@ -85,6 +85,8 @@ const introText = css`
 
   color: ${common.color.brown4};
 
+  z-index: 1;
+
   // collected money
   & > div:last-child > span {
     color: ${common.color.brown5};
@@ -113,26 +115,47 @@ const userSettingBtn = css`
 const rabbitImage = (money) => css`
   background: url(${getRabbitImage(money)}) no-repeat center/contain;
   width: 322px;
-  height: 573px;
+  height: 100%;
+  max-height: 573px;
+`;
+
+const bottomText = css`
+  width: 100%;
+  padding: 13px 0;
 
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-`;
 
-const bottomText = css`
-  padding: 13px 0;
+  text-align: center;
+
   z-index: 1;
 `;
 
 const invisibleButton = css`
-  width: 230px;
-  height: 210px;
+  @media (min-height: 500px) {
+    width: 31vh;
+    height: 28%;
+  }
+
+  @media (min-height: 600px) {
+    width: 32vh;
+    height: 30%;
+  }
+
+  @media (min-height: 700px) {
+    width: 230px;
+    height: 210px;
+  }
+
+  width: 30vh;
+  height: 25%;
 
   position: absolute;
   bottom: 25px;
-  left: 40px;
+  left: 45%;
+  transform: translateX(-45%);
 
   cursor: pointer;
 `;

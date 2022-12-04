@@ -35,7 +35,9 @@ export default AuthenticationCompleted;
 const flexCenterColumn = css`
   width: 100%;
   height: 100%;
+  min-height: 700px;
   position: relative;
+  overflow: hidden;
 `;
 
 const boldText = css`
