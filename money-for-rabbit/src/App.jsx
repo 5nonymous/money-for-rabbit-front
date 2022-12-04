@@ -14,6 +14,7 @@ import SelectMoney from './pages/user-page/SelectMoney';
 import EmailAuthentication from './pages/sign-up/EmailAuthentication';
 import WriteMessage from './pages/user-page/WriteMessage';
 import LetterList from './pages/letter/LetterList';
+import Letter from './pages/letter/Letter';
 
 function App() {
   return (
@@ -32,6 +33,10 @@ function App() {
         <Route
           path="/user/:userId/letters"
           element={<Layout page={<LetterList />} />}
+        />
+        <Route
+          path="/user/:userId/letters/:letterId"
+          element={<Layout page={<Letter />} />}
         />
         <Route path="/signup" element={<Layout page={<SignUp />} />} />
         <Route
