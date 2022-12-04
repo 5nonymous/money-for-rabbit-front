@@ -8,7 +8,7 @@ import common from '../../styles/common';
 import TextButton from '../../components/button/TextButton';
 import Box from './Box';
 
-import dummyData from './dummyData';
+import { letterListData as dummyData } from './dummyData';
 
 function LetterList() {
   const userName = '어쩌구';
