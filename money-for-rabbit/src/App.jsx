@@ -14,6 +14,7 @@ import SelectMoney from './pages/user-page/SelectMoney';
 import EmailAuthentication from './pages/sign-up/EmailAuthentication';
 import WriteMessage from './pages/user-page/WriteMessage';
 import LetterList from './pages/letter/LetterList';
+import AuthenticationFailed from './pages/sign-up/AuthenticationFailed';
 
 function App() {
   return (
@@ -41,6 +42,10 @@ function App() {
         <Route
           path="/signup/done"
           element={<Layout page={<AuthenticationCompleted />} />}
+        />
+        <Route
+          path="/signup/fail"
+          element={<Layout page={<AuthenticationFailed />} />}
         />
         <Route path="/withdrawal" element={<Layout page={<Withdrawal />} />} />
         <Route path="/withdrawal/done" element={<Layout page={<Done />} />} />
