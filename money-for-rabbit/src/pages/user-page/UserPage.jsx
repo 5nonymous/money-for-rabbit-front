@@ -42,11 +42,11 @@ function UserPage() {
     const time = localStorage.getItem('time');
 
     if (time === timeArr[0]) {
-      setTime(() => timeArr[1]);
+      setTime(timeArr[1]);
     } else if (time === timeArr[1]) {
-      setTime(() => timeArr[2]);
+      setTime(timeArr[2]);
     } else {
-      setTime(() => timeArr[0]);
+      setTime(timeArr[0]);
     }
     window.location.reload();
   }
