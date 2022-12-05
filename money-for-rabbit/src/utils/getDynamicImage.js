@@ -4,11 +4,36 @@ const getHours = () => {
   return hours;
 };
 
+// const getBackgroundImage = () => {
+//   const hours = getHours();
+
+//   // 07 ~ 16 : afternoon
+//   // 17 ~ 18 : dusk
+//   // 19 ~ 06 : night
+
+//   if (7 <= hours && hours <= 16) {
+//     return '/images/Background:Afternoon.jpeg';
+//   } else if (17 <= hours && hours <= 18) {
+//     return '/images/Background:Dusk.jpeg';
+//   } else {
+//     return '/images/Background:Night.jpeg';
+//   }
+
+//   if (7 <= hours && hours <= 16) {
+//     return '/images/Background:Afternoon.jpeg';
+//   } else if (17 <= hours && hours <= 18) {
+//     return '/images/Background:Dusk.jpeg';
+//   } else {
+//     return '/images/Background:Night.jpeg';
+//   }
+// };
+
 const getBackgroundImage = () => {
-  const hours = getHours();
-  // 07 ~ 16 : afternoon
-  // 17 ~ 18 : dusk
-  // 19 ~ 06 : night
+  let hours = Number(
+    localStorage.getItem('time')
+      ? localStorage.getItem('time').split(':')[0]
+      : '09'
+  );
 
   if (7 <= hours && hours <= 16) {
     return '/images/Background:Afternoon.jpeg';
