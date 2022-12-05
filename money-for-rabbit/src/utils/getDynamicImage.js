@@ -29,7 +29,7 @@ const getHours = () => {
 // };
 
 const getBackgroundImage = () => {
-  let hours = Number(
+  const hours = Number(
     localStorage.getItem('time')
       ? localStorage.getItem('time').split(':')[0]
       : '09'

@@ -52,7 +52,7 @@ function UserPage() {
   }
 
   return (
-    <div css={wrapper(time)}>
+    <div css={wrapper}>
       <div css={introText}>
         <div>
           {isOthersPage ? (
