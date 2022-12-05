@@ -39,7 +39,7 @@ function UserPage() {
 
   function handleTimeSettingBtn() {
     const timeArr = ['09:00', '18:00', '00:00'];
-    let time = localStorage.getItem('time');
+    const time = localStorage.getItem('time');
 
     if (time === timeArr[0]) {
       setTime(() => timeArr[1]);
