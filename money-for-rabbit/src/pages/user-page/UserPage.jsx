@@ -1,14 +1,20 @@
 /** @jsxImportSource @emotion/react */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-import { useState } from 'react';
 import common from '../../styles/common';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getBackgroundImage, getRabbitImage } from '../../utils/getDynamicImage';
+import {
+  getBackgroundImage,
+  getRabbitImage,
+} from '../../utils/getDynamicImage';
 import Modal from '../../components/modal/Modal';
 
 function UserPage() {
+  const [time, setTime] = useState(
+    localStorage.getItem('time') ? localStorage.getItem('time') : '09:00'
+  );
+
   const username = '어쩌구';
   const money = 1234;
 
@@ -19,12 +25,30 @@ function UserPage() {
   const [isOthersPage, setIsOthersPage] = useState(userId !== currentUserId);
   const [modal, setModal] = useState(false);
 
+  useEffect(() => {
+    localStorage.setItem('time', time);
+  }, [time]);
+
   function handleClick() {
     if (isOthersPage) {
       navigate(`/user/${userId}/new`);
     } else {
       console.log('받은 쪽지 열람 페이지로 이동합니다.');
     }
+  }
+
+  function handleTimeSettingBtn() {
+    const timeArr = ['09:00', '18:00', '00:00'];
+    const time = localStorage.getItem('time');
+
+    if (time === timeArr[0]) {
+      setTime(timeArr[1]);
+    } else if (time === timeArr[1]) {
+      setTime(timeArr[2]);
+    } else {
+      setTime(timeArr[0]);
+    }
+    window.location.reload();
   }
 
   return (
@@ -40,8 +64,13 @@ function UserPage() {
           )}
         </div>
         <div>
-          <span>{collectedMoney}</span> 원{isOthersPage ? '을 모았어요.' : '이 모였어요.'}
+          <span>{collectedMoney}</span> 원
+          {isOthersPage ? '을 모았어요.' : '이 모였어요.'}
         </div>
+      </div>
+      <div css={timeSettingWrapper}>
+        <div css={timeSettingBtn} onClick={handleTimeSettingBtn} />
+        <span>{time}</span>
       </div>
 
       <div css={rabbitImage(money)}>
@@ -62,7 +91,7 @@ function UserPage() {
 
 export default UserPage;
 
-const wrapper = css`
+const wrapper = () => css`
   background: url(${getBackgroundImage()}) center/cover;
   width: 100%;
   height: 100%;
@@ -110,6 +139,28 @@ const userSettingBtn = css`
       background: ${common.color.brown1};
     }
   }
+`;
+
+const timeSettingWrapper = css`
+  width: 58px;
+  height: fit-content;
+  position: absolute;
+  top: 25px;
+  right: 28px;
+  ${common.align.centerColumn};
+
+  span {
+    ${common.fontSize[12]};
+    ${common.fontWeight.medium};
+  }
+`;
+
+const timeSettingBtn = css`
+  width: 58px;
+  height: 71px;
+  background: url('/images/time_setting_button_icon.png') no-repeat center/cover;
+  z-index: 1;
+  cursor: pointer;
 `;
 
 const rabbitImage = (money) => css`

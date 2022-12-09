@@ -11,10 +11,6 @@ function EmailAuthentication() {
   const location = useLocation();
   const [userData, setUserData] = useState();
 
-  const resendEmail = () => {
-    alert('이메일을 재발송 합니다.');
-  };
-
   useEffect(() => {
     if (!location.state) {
       navigate('/signup');
@@ -43,9 +39,6 @@ function EmailAuthentication() {
             메일함 확인 후
             <br />
             이메일 인증을 진행해주세요.
-          </p>
-          <p>
-            받지 못하셨나요? <span onClick={() => resendEmail()}>메일 재발송</span>
           </p>
         </div>
 
