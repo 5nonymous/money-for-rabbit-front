@@ -6,16 +6,20 @@ import common from '../../styles/common';
 import TextButton from '../../components/button/TextButton';
 import { getMoneyImage } from '../../utils/getDynamicImage';
 
-function Box({ size, writer, priceImg }) {
+function Box({ size, writer, priceImg, contents }) {
   console.log('getMoneyImage(priceImg)', getMoneyImage(priceImg));
 
   return (
     <div css={wrapper(size)}>
       <div css={priceImgWrapper(priceImg)} />
-      {writer} 님
-      <div css={textButtonWrapper}>
-        <TextButton label={'더보기'} />
-      </div>
+      <span css={writerStyle}>{writer} 님</span>
+      {size === 'small' ? (
+        <div css={textButtonWrapper}>
+          <TextButton label={'더보기'} />
+        </div>
+      ) : (
+        <p css={contentsStyle}>{contents}</p>
+      )}
     </div>
   );
 }
@@ -41,7 +45,19 @@ const priceImgWrapper = (priceImg) => css`
   ${getMoneyImage(priceImg)};
 `;
 
+const writerStyle = css`
+  position: absolute;
+  top: 54px;
+`;
+
 const textButtonWrapper = css`
   position: absolute;
   bottom: 19px;
+`;
+
+const contentsStyle = css`
+  margin: 0;
+  color: ${common.color.black};
+  ${common.fontWeight.semiBold};
+  ${common.fontSize[20]};
 `;

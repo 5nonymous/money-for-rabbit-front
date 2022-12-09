@@ -9,7 +9,9 @@ function Layout({ page }) {
       <video css={video} autoPlay loop muted>
         <source src={'background_video.mp4'} type="video/mp4" />
       </video>
-      <div css={container}>{page}</div>
+      <div css={container} id="container">
+        {page}
+      </div>
     </div>
   );
 }
