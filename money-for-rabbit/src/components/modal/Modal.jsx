@@ -1,19 +1,51 @@
 /** @jsxImportSource @emotion/react */
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
 import common from '../../styles/common';
 import Input from '../input/Input';
 import BoxButton from '../button/BoxButton';
 import Notion from '../button/Notion';
+import axios from 'axios';
+import getUserNumber from '../../utils/getUserNumber';
 
 function Modal({ close, type }) {
-  const handleOnClickSignIn = () => {
-    alert('login button click');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [inputInfo, setInputInfo] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setInputInfo((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+  };
+
+  const handleOnClickSignIn = (e) => {
+    e.preventDefault();
+    axios
+      .post('http://tgoddessana.pythonanywhere.com/api/user/login', inputInfo)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem('accessToken', res.data.access_token);
+
+        navigate(`/user/${getUserNumber()}`);
+      })
+      .catch((err) => alert(err.response.data.error));
   };
 
   const handleOnClickSignUp = () => {
-    alert('signup button click');
+    if (location.pathname === '/signup') {
+      close();
+    } else {
+      navigate('/signup');
+    }
   };
 
   const click = (e) => {
@@ -37,8 +69,22 @@ function Modal({ close, type }) {
   const SignIn = (
     <div css={wrapper({ type })}>
       <form css={signIn}>
-        <Input type={'email'} style={'sign'} placeholder={'이메일 주소'} />
-        <Input type={'password'} style={'sign'} placeholder={'비밀번호'} />
+        <Input
+          id={'email'}
+          value={inputInfo.email}
+          type={'email'}
+          style={'sign'}
+          placeholder={'이메일 주소'}
+          onChange={handleChange}
+        />
+        <Input
+          id={'password'}
+          value={inputInfo.password}
+          type={'password'}
+          style={'sign'}
+          placeholder={'비밀번호'}
+          onChange={handleChange}
+        />
         <BoxButton type={'submit'} onClick={handleOnClickSignIn}>
           로그인
         </BoxButton>
