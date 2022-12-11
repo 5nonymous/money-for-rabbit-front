@@ -8,6 +8,7 @@ import Input from '../input/Input';
 import BoxButton from '../button/BoxButton';
 import Notion from '../button/Notion';
 import axios from 'axios';
+import getUserNumber from '../../utils/getUserNumber';
 
 function Modal({ close, type }) {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Modal({ close, type }) {
         console.log(res);
         localStorage.setItem('accessToken', res.data.access_token);
 
-        // TODO: 로그인 성공 시 유저페이지로 이동
+        navigate(`/user/${getUserNumber()}`);
       })
       .catch((err) => alert(err.response.data.error));
   };
