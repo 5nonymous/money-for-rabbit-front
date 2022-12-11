@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
 import common from '../../styles/common';
 import Input from '../input/Input';
@@ -11,6 +11,7 @@ import axios from 'axios';
 
 function Modal({ close, type }) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [inputInfo, setInputInfo] = useState({
     email: '',
@@ -38,7 +39,11 @@ function Modal({ close, type }) {
   };
 
   const handleOnClickSignUp = () => {
-    navigate('/signup');
+    if (location.pathname === '/signup') {
+      close();
+    } else {
+      navigate('/signup');
+    }
   };
 
   const click = (e) => {
