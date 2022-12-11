@@ -32,7 +32,8 @@ function Modal({ close, type }) {
       .post('http://tgoddessana.pythonanywhere.com/api/user/login', inputInfo)
       .then((res) => {
         console.log(res);
-        localStorage.setItem('access_token : ', res.data.access_token);
+        localStorage.setItem('accessToken', res.data.access_token);
+
         // TODO: 로그인 성공 시 유저페이지로 이동
       })
       .catch((err) => alert(err.response.data.error));
