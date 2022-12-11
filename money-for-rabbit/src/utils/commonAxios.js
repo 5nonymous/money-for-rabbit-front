@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const accessToken = '';
+const accessToken = localStorage.getItem('access_token');
 
 const commonAxios = axios.create({
   baseURL: 'http://tgoddessana.pythonanywhere.com/api/',
