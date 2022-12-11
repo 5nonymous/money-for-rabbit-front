@@ -1,39 +1,66 @@
 /** @jsxImportSource @emotion/react */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import common from '../../styles/common';
 import TextButton from '../../components/button/TextButton';
 import Box from './Box';
 
-import { letterListData as dummyData } from './dummyData';
+import commonAxios from '../../utils/commonAxios';
 
 function LetterList() {
-  const userName = '어쩌구';
+  const userId = 12;
+
+  const [data, setData] = useState();
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    commonAxios
+      .get(`user/${userId}/messages?page=${page}`)
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => console.log(err.response.data.error));
+  }, [page]);
+
   return (
     <div css={wrapper}>
       <div css={textButtonWrapper}>
         <TextButton label={'이전'} />
       </div>
-      <h1>{userName} 님이 받은 세뱃돈 입니다.</h1>
-      <div css={lettersWrapper}>
-        {dummyData.map((el) => {
-          return (
-            <Box
-              key={el.id}
-              size={'small'}
-              writer={el.writer}
-              priceImg={el.image}
+      {data && (
+        <>
+          <h1>{data.user_info.username} 님이 받은 세뱃돈 입니다.</h1>
+          <div css={lettersWrapper}>
+            {data.messages.map((el) => {
+              return (
+                <Box
+                  key={el.id}
+                  size={'small'}
+                  writer={el.author_name}
+                  priceImg={el.image_name}
+                />
+              );
+            })}
+          </div>
+          <div css={paginationWrapper}>
+            <Icon
+              icon={faAngleLeft}
+              state={data.prev}
+              onClick={() => setPage((prev) => prev - 1)}
             />
-          );
-        })}
-      </div>
-      <div css={paginationWrapper}>
-        <FontAwesomeIcon icon={faAngleLeft} />1
-        <FontAwesomeIcon icon={faAngleRight} />
-      </div>
+            {page}
+            <Icon
+              icon={faAngleRight}
+              state={data.next}
+              onClick={() => setPage((prev) => prev + 1)}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -83,4 +110,8 @@ const paginationWrapper = css`
   svg {
     cursor: pointer;
   }
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  visibility: ${(props) => (props.state ? 'visible' : 'hidden')};
 `;

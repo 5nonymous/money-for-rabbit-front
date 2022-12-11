@@ -7,9 +7,12 @@ function Layout({ page }) {
   return (
     <div css={wrapper}>
       <video css={video} autoPlay loop muted>
-        <source src={process.env.PUBLIC_URL + '/background_video.mp4'} type='video/mp4' />
+        <source
+          src={process.env.PUBLIC_URL + '/background_video.mp4'}
+          type="video/mp4"
+        />
       </video>
-      <div css={container} id='container'>
+      <div css={container} id="container">
         {page}
       </div>
     </div>
@@ -39,5 +42,5 @@ const video = css`
 const container = css`
   width: 390px;
   height: 100vh;
-  /* background-color: blue; */
+  background-color: white;
 `;
