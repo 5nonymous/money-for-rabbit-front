@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import axios from 'axios';
@@ -8,9 +8,11 @@ import common from '../../styles/common';
 import Input from '../../components/input/Input';
 import BoxButton from '../../components/button/BoxButton';
 import Notion from '../../components/button/Notion';
+import Modal from '../../components/modal/Modal';
 
 function SignUp() {
   const navigate = useNavigate();
+  const [modal, setModal] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,13 +61,14 @@ function SignUp() {
           <Line />
 
           <p css={regularText(20)}>이미 계정이 있습니까?</p>
-          <BoxButton light onClick={() => navigate('/login')}>
+          <BoxButton light onClick={() => setModal(true)}>
             로그인
           </BoxButton>
 
           <Notion />
         </div>
       </div>
+      {modal && <Modal type={'signIn'} close={() => setModal(false)} />}
     </div>
   );
 }

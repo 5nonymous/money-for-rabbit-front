@@ -2,28 +2,38 @@
 
 import React, { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
+import commonAxios from '../../utils/commonAxios';
+import decodeJWT from '../../utils/decodeJWT';
 import common from '../../styles/common';
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  getBackgroundImage,
-  getRabbitImage,
-} from '../../utils/getDynamicImage';
+import { getBackgroundImage, getRabbitImage } from '../../utils/getDynamicImage';
 import Modal from '../../components/modal/Modal';
 
 function UserPage() {
-  const [time, setTime] = useState(
-    localStorage.getItem('time') ? localStorage.getItem('time') : '09:00'
-  );
-
-  const username = '어쩌구';
-  const money = 1234;
+  const accessToken = localStorage.getItem('accessToken') || '';
+  const [time, setTime] = useState(localStorage.getItem('time') ? localStorage.getItem('time') : '09:00');
 
   const navigate = useNavigate();
   const { userId } = useParams();
-  const currentUserId = '1';
-  const collectedMoney = money.toLocaleString('ko-KR');
-  const [isOthersPage, setIsOthersPage] = useState(userId !== currentUserId);
+
+  const currentUserId = accessToken && decodeJWT(accessToken).sub;
+  const isOthersPage = +userId !== +currentUserId;
+
+  const [username, setUsername] = useState();
+  const [totalAmount, setTotalAmount] = useState();
+
   const [modal, setModal] = useState(false);
+
+  useEffect(() => {
+    if (accessToken) {
+      commonAxios.get(`user/${userId}`).then((response) => {
+        const { username, total_amount } = response.data.user_info;
+
+        setUsername(username);
+        setTotalAmount(total_amount.toLocaleString('ko-KR'));
+      });
+    }
+  }, [userId, accessToken]);
 
   useEffect(() => {
     localStorage.setItem('time', time);
@@ -64,8 +74,7 @@ function UserPage() {
           )}
         </div>
         <div>
-          <span>{collectedMoney}</span> 원
-          {isOthersPage ? '을 모았어요.' : '이 모였어요.'}
+          <span>{totalAmount}</span> 원{isOthersPage ? '을 모았어요.' : '이 모였어요.'}
         </div>
       </div>
       <div css={timeSettingWrapper}>
@@ -73,7 +82,7 @@ function UserPage() {
         <span>{time}</span>
       </div>
 
-      <div css={rabbitImage(money)}>
+      <div css={rabbitImage(+totalAmount)}>
         <div css={invisibleButton} onClick={() => handleClick()} />
       </div>
 
@@ -85,6 +94,7 @@ function UserPage() {
       </div>
 
       {modal && <Modal type={'profile'} close={() => setModal(false)} />}
+      {!accessToken && <Modal type={'signIn'} />}
     </div>
   );
 }
