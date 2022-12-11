@@ -63,7 +63,9 @@ function Modal({ close, type }) {
   };
 
   const onClickLogOut = () => {
-    alert('로그아웃');
+    localStorage.removeItem('accessToken');
+    alert('로그아웃 되었습니다.');
+    navigate('/');
   };
 
   const SignIn = (
