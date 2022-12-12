@@ -43,7 +43,7 @@ function UserPage() {
     if (isOthersPage) {
       navigate(`/user/${userId}/new`);
     } else {
-      console.log('받은 쪽지 열람 페이지로 이동합니다.');
+      navigate(`/user/${userId}/letters`);
     }
   }
 
