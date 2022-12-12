@@ -30,7 +30,7 @@ function UserPage() {
         const { username, total_amount } = response.data.user_info;
 
         setUsername(username);
-        setTotalAmount(total_amount.toLocaleString('ko-KR'));
+        setTotalAmount(total_amount);
       });
     }
   }, [userId, accessToken]);
@@ -74,7 +74,8 @@ function UserPage() {
           )}
         </div>
         <div>
-          <span>{totalAmount}</span> 원{isOthersPage ? '을 모았어요.' : '이 모였어요.'}
+          <span>{totalAmount && totalAmount.toLocaleString('ko-KR')}</span> 원
+          {isOthersPage ? '을 모았어요.' : '이 모였어요.'}
         </div>
       </div>
       <div css={timeSettingWrapper}>
