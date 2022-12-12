@@ -9,6 +9,7 @@ import BoxButton from '../button/BoxButton';
 import Notion from '../button/Notion';
 import axios from 'axios';
 import getUserNumber from '../../utils/getUserNumber';
+import commonAxios from '../../utils/commonAxios';
 
 function Modal({ close, type }) {
   const navigate = useNavigate();
@@ -19,12 +20,18 @@ function Modal({ close, type }) {
     password: '',
   });
 
-  const handleChange = (e) => {
+  const [username, setUsername] = useState();
+
+  const handleChangeSignIn = (e) => {
     const { id, value } = e.target;
     setInputInfo((prevState) => ({
       ...prevState,
       [id]: value,
     }));
+  };
+
+  const handleChangeUserName = (e) => {
+    setUsername(e.target.value);
   };
 
   const handleOnClickSignIn = (e) => {
@@ -55,7 +62,17 @@ function Modal({ close, type }) {
   };
 
   const onClickNicknameHandler = () => {
-    alert('click');
+    if (username) {
+      commonAxios
+        .put(`user/${getUserNumber()}`, { username })
+        .then((res) => {
+          alert(`${username}으로 닉네임 변경했습니다.`);
+          window.location.reload();
+        })
+        .catch((err) => console.log(err.response.data));
+    } else {
+      alert('입력값이 없습니다.');
+    }
   };
 
   const onClickWithdrawal = () => {
@@ -77,7 +94,7 @@ function Modal({ close, type }) {
           type={'email'}
           style={'sign'}
           placeholder={'이메일 주소'}
-          onChange={handleChange}
+          onChange={handleChangeSignIn}
         />
         <Input
           id={'password'}
@@ -85,7 +102,7 @@ function Modal({ close, type }) {
           type={'password'}
           style={'sign'}
           placeholder={'비밀번호'}
-          onChange={handleChange}
+          onChange={handleChangeSignIn}
         />
         <BoxButton type={'submit'} onClick={handleOnClickSignIn}>
           로그인
@@ -104,7 +121,12 @@ function Modal({ close, type }) {
   const Profile = (
     <div css={wrapper({ type })}>
       <div css={inputWrapper}>
-        <Input type={'text'} style={'nickname'} placeholder={'닉네임 입력'} />
+        <Input
+          type={'text'}
+          style={'nickname'}
+          placeholder={'닉네임 입력'}
+          onChange={handleChangeUserName}
+        />
         <span onClick={onClickNicknameHandler}>변경</span>
       </div>
       <div css={buttonWrapper}>
