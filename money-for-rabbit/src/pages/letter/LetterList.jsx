@@ -44,6 +44,8 @@ function LetterList() {
                   size={'small'}
                   writer={el.author_name}
                   priceImg={el.image_name}
+                  messageId={el.id}
+                  userId={getUserNumber()}
                 />
               );
             })}
