@@ -15,16 +15,17 @@ function Letter() {
   const navigate = useNavigate();
   const location = useLocation();
   const [data, setData] = useState();
+  const [username, setUsername] = useState();
 
   const pathname = location.pathname;
   const userId = pathname.split('/')[2];
   const letterId = pathname.split('/')[4];
 
-  // TODO: 쪽지를 받은 사람을 알 수 있는 방법이 필요함
-  // axios
-  //   .get(`http://tgoddessana.pythonanywhere.com/api/user/${userId}`)
-  //   .then((res) => console.log('res', res));
-  const userName = userId;
+  axios
+    .get(`http://tgoddessana.pythonanywhere.com/api/user/${userId}`)
+    .then((res) => {
+      setUsername(res.data.user_info.username);
+    });
 
   useEffect(() => {
     axios
@@ -65,7 +66,7 @@ function Letter() {
       <div css={textButtonWrapper} id="prevBtn">
         <TextButton label={'이전'} onClick={() => navigate(-1)} />
       </div>
-      <h1>{userName} 님이 받은 세뱃돈 입니다.</h1>
+      <h1>{username} 님이 받은 세뱃돈 입니다.</h1>
       <div css={lettersWrapper}>
         {data && (
           <Box
