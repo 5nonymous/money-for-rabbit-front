@@ -1,13 +1,21 @@
 /** @jsxImportSource @emotion/react */
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import common from '../../styles/common';
 import TextButton from '../../components/button/TextButton';
 import { getMoneyImage } from '../../utils/getDynamicImage';
 
-function Box({ size, writer, priceImg, contents }) {
+function Box({ size, writer, priceImg, contents, messageId, userId }) {
+  const navigate = useNavigate();
   console.log('getMoneyImage(priceImg)', getMoneyImage(priceImg));
+  console.log('messageId :>> ', messageId);
+  console.log('userId :>> ', userId);
+
+  const onClickBtn = () => {
+    navigate(`/user/${userId}/letters/${messageId}`);
+  };
 
   return (
     <div css={wrapper(size)}>
@@ -15,7 +23,7 @@ function Box({ size, writer, priceImg, contents }) {
       <span css={writerStyle}>{writer} 님</span>
       {size === 'small' ? (
         <div css={textButtonWrapper}>
-          <TextButton label={'더보기'} />
+          <TextButton label={'더보기'} onClick={onClickBtn} />
         </div>
       ) : (
         <p css={contentsStyle}>{contents}</p>

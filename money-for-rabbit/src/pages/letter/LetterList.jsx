@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,16 +11,17 @@ import TextButton from '../../components/button/TextButton';
 import Box from './Box';
 
 import commonAxios from '../../utils/commonAxios';
+import getUserNumber from '../../utils/getUserNumber';
 
 function LetterList() {
-  const userId = 12;
+  const navigate = useNavigate();
 
   const [data, setData] = useState();
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     commonAxios
-      .get(`user/${userId}/messages?page=${page}`)
+      .get(`user/${getUserNumber()}/messages?page=${page}`)
       .then((res) => {
         setData(res.data);
       })
@@ -29,7 +31,7 @@ function LetterList() {
   return (
     <div css={wrapper}>
       <div css={textButtonWrapper}>
-        <TextButton label={'이전'} />
+        <TextButton label={'이전'} onClick={() => navigate(-1)} />
       </div>
       {data && (
         <>
@@ -42,6 +44,8 @@ function LetterList() {
                   size={'small'}
                   writer={el.author_name}
                   priceImg={el.image_name}
+                  messageId={el.id}
+                  userId={getUserNumber()}
                 />
               );
             })}
