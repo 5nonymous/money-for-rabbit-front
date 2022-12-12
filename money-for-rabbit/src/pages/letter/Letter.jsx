@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
 import common from '../../styles/common';
 import TextButton from '../../components/button/TextButton';
@@ -9,11 +9,33 @@ import { letterData as dummyData } from './dummyData';
 import Box from './Box';
 import IconButton from '../../components/button/IconButton';
 import html2canvas from 'html2canvas';
+import axios from 'axios';
 
 function Letter() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [data, setData] = useState();
 
-  const userName = '어쩌구';
+  const pathname = location.pathname;
+  const userId = pathname.split('/')[2];
+  const letterId = pathname.split('/')[4];
+
+  // TODO: 쪽지를 받은 사람을 알 수 있는 방법이 필요함
+  // axios
+  //   .get(`http://tgoddessana.pythonanywhere.com/api/user/${userId}`)
+  //   .then((res) => console.log('res', res));
+  const userName = userId;
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://tgoddessana.pythonanywhere.com/api/user/${userId}/messages/${letterId}`
+      )
+      .then((res) => {
+        console.log('res', res);
+        setData(res.data);
+      });
+  }, []);
 
   const onClickCaptureBtn = () => {
     document.getElementById('prevBtn').style.opacity = 0;
@@ -45,12 +67,14 @@ function Letter() {
       </div>
       <h1>{userName} 님이 받은 세뱃돈 입니다.</h1>
       <div css={lettersWrapper}>
-        <Box
-          size={'big'}
-          writer={dummyData.author_name}
-          contents={dummyData.message}
-          priceImg={dummyData.image_name}
-        />
+        {data && (
+          <Box
+            size={'big'}
+            writer={data.author_name}
+            contents={data.message}
+            priceImg={data.image_name}
+          />
+        )}
       </div>
       <div css={btnWrapper}>
         <IconButton capture onClick={onClickCaptureBtn} />
