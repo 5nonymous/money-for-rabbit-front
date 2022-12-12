@@ -1,12 +1,19 @@
 import axios from 'axios';
 
-const accessToken = localStorage.getItem('accessToken');
-
 const commonAxios = axios.create({
   baseURL: 'http://tgoddessana.pythonanywhere.com/api/',
-  headers: {
-    Authorization: `Bearer ${accessToken}`,
-  },
+});
+
+commonAxios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('accessToken');
+
+  if (!token) {
+    config.headers['Authorization'] = null;
+    return config;
+  } else {
+    config.headers['Authorization'] = 'Bearer ' + token;
+    return config;
+  }
 });
 
 export default commonAxios;
