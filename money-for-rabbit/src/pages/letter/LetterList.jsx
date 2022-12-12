@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +14,8 @@ import commonAxios from '../../utils/commonAxios';
 import getUserNumber from '../../utils/getUserNumber';
 
 function LetterList() {
+  const navigate = useNavigate();
+
   const [data, setData] = useState();
   const [page, setPage] = useState(1);
 
@@ -28,7 +31,7 @@ function LetterList() {
   return (
     <div css={wrapper}>
       <div css={textButtonWrapper}>
-        <TextButton label={'이전'} />
+        <TextButton label={'이전'} onClick={() => navigate(-1)} />
       </div>
       {data && (
         <>
