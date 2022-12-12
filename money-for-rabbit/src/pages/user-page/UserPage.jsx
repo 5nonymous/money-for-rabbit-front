@@ -23,17 +23,24 @@ function UserPage() {
   const [totalAmount, setTotalAmount] = useState();
 
   const [modal, setModal] = useState(false);
+  const [isExistUser, setIsExistUser] = useState();
 
   useEffect(() => {
     if (accessToken) {
-      commonAxios.get(`user/${userId}`).then((response) => {
-        const { username, total_amount } = response.data.user_info;
+      commonAxios
+        .get(`user/${userId}`)
+        .then((response) => {
+          const { username, total_amount } = response.data.user_info;
 
-        setUsername(username);
-        setTotalAmount(total_amount);
-      });
+          setUsername(username);
+          setTotalAmount(total_amount);
+          setIsExistUser(true);
+        })
+        .catch(() => {
+          setIsExistUser(false);
+        });
     }
-  }, [userId, accessToken]);
+  }, [userId, accessToken, navigate]);
 
   useEffect(() => {
     localStorage.setItem('time', time);
@@ -61,48 +68,57 @@ function UserPage() {
     window.location.reload();
   }
 
-  return (
-    <div css={wrapper}>
-      {accessToken ? (
-        <>
-          <div css={introText}>
-            <div>
-              {isOthersPage ? (
-                <span>{username} 님은</span>
-              ) : (
-                <div css={userSettingBtn}>
-                  <span onClick={() => setModal(true)}>{username}</span> 님
-                </div>
-              )}
+  if (isExistUser)
+    return (
+      <div css={wrapper}>
+        {accessToken ? (
+          <>
+            <div css={introText}>
+              <div>
+                {isOthersPage ? (
+                  <span>{username} 님은</span>
+                ) : (
+                  <div css={userSettingBtn}>
+                    <span onClick={() => setModal(true)}>{username}</span> 님
+                  </div>
+                )}
+              </div>
+              <div>
+                <span>{totalAmount && totalAmount.toLocaleString('ko-KR')}</span> 원
+                {isOthersPage ? '을 모았어요.' : '이 모였어요.'}
+              </div>
             </div>
-            <div>
-              <span>{totalAmount && totalAmount.toLocaleString('ko-KR')}</span> 원
-              {isOthersPage ? '을 모았어요.' : '이 모였어요.'}
+            <div css={timeSettingWrapper}>
+              <div css={timeSettingBtn} onClick={handleTimeSettingBtn} />
+              <span>{time}</span>
             </div>
-          </div>
-          <div css={timeSettingWrapper}>
-            <div css={timeSettingBtn} onClick={handleTimeSettingBtn} />
-            <span>{time}</span>
-          </div>
 
-          <div css={rabbitImage(+totalAmount)}>
-            <div css={invisibleButton} onClick={() => handleClick()} />
-          </div>
-
-          <div css={bottomText}>
-            <div>
-              절구통을 눌러
-              {isOthersPage ? ' 쪽지를 전달하세요.' : ' 받은 쪽지를 확인해보세요.'}
+            <div css={rabbitImage(+totalAmount)}>
+              <div css={invisibleButton} onClick={() => handleClick()} />
             </div>
-          </div>
 
-          {modal && <Modal type={'profile'} close={() => setModal(false)} />}
-        </>
-      ) : (
-        <Modal type={'signIn'} />
-      )}
-    </div>
-  );
+            <div css={bottomText}>
+              <div>
+                절구통을 눌러
+                {isOthersPage ? ' 쪽지를 전달하세요.' : ' 받은 쪽지를 확인해보세요.'}
+              </div>
+            </div>
+
+            {modal && <Modal type={'profile'} close={() => setModal(false)} />}
+          </>
+        ) : (
+          <Modal type={'signIn'} />
+        )}
+      </div>
+    );
+  else
+    return (
+      <div css={wrapper}>
+        <div css={errorText}>사용자를 찾을 수 없습니다.</div>
+
+        <div css={rabbitImage(1)} />
+      </div>
+    );
 }
 
 export default UserPage;
@@ -225,4 +241,14 @@ const invisibleButton = css`
   transform: translateX(-45%);
 
   cursor: pointer;
+`;
+
+const errorText = css`
+  padding: 50px 14px;
+  width: 100%;
+
+  text-align: center;
+  color: ${common.color.brown5};
+
+  z-index: 1;
 `;
