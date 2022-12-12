@@ -63,39 +63,44 @@ function UserPage() {
 
   return (
     <div css={wrapper}>
-      <div css={introText}>
-        <div>
-          {isOthersPage ? (
-            <span>{username} 님은</span>
-          ) : (
-            <div css={userSettingBtn}>
-              <span onClick={() => setModal(true)}>{username}</span> 님
+      {accessToken ? (
+        <>
+          <div css={introText}>
+            <div>
+              {isOthersPage ? (
+                <span>{username} 님은</span>
+              ) : (
+                <div css={userSettingBtn}>
+                  <span onClick={() => setModal(true)}>{username}</span> 님
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        <div>
-          <span>{totalAmount && totalAmount.toLocaleString('ko-KR')}</span> 원
-          {isOthersPage ? '을 모았어요.' : '이 모였어요.'}
-        </div>
-      </div>
-      <div css={timeSettingWrapper}>
-        <div css={timeSettingBtn} onClick={handleTimeSettingBtn} />
-        <span>{time}</span>
-      </div>
+            <div>
+              <span>{totalAmount && totalAmount.toLocaleString('ko-KR')}</span> 원
+              {isOthersPage ? '을 모았어요.' : '이 모였어요.'}
+            </div>
+          </div>
+          <div css={timeSettingWrapper}>
+            <div css={timeSettingBtn} onClick={handleTimeSettingBtn} />
+            <span>{time}</span>
+          </div>
 
-      <div css={rabbitImage(+totalAmount)}>
-        <div css={invisibleButton} onClick={() => handleClick()} />
-      </div>
+          <div css={rabbitImage(+totalAmount)}>
+            <div css={invisibleButton} onClick={() => handleClick()} />
+          </div>
 
-      <div css={bottomText}>
-        <div>
-          절구통을 눌러
-          {isOthersPage ? ' 쪽지를 전달하세요.' : ' 받은 쪽지를 확인해보세요.'}
-        </div>
-      </div>
+          <div css={bottomText}>
+            <div>
+              절구통을 눌러
+              {isOthersPage ? ' 쪽지를 전달하세요.' : ' 받은 쪽지를 확인해보세요.'}
+            </div>
+          </div>
 
-      {modal && <Modal type={'profile'} close={() => setModal(false)} />}
-      {!accessToken && <Modal type={'signIn'} />}
+          {modal && <Modal type={'profile'} close={() => setModal(false)} />}
+        </>
+      ) : (
+        <Modal type={'signIn'} />
+      )}
     </div>
   );
 }
