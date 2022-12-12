@@ -33,7 +33,7 @@ function SignUp() {
         .catch((err) => {
           let errorMessage = err.response.data;
 
-          alert(errorMessage['Bad Request']);
+          alert(errorMessage['error']);
         });
     } else {
       alert('비밀번호가 일치하지 않습니다.');
