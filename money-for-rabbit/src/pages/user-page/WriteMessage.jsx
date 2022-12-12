@@ -28,13 +28,13 @@ function WriteMessage() {
 
       commonAxios
         .post(`user/${userId}/messages`, data)
-        .then((response) => console.log(response))
-        .catch(alert('쪽지를 보낼 수 없습니다.'));
-
-      console.log('data: ', data);
-      console.log(`${userId}의 페이지로 이동`);
-
-      navigate(`/user/${userId}`);
+        .then((response) => {
+          alert('쪽지가 전달되었습니다.');
+          navigate(`/user/${userId}`);
+        })
+        .catch((err) => {
+          alert(err.response.data['error']);
+        });
     } else {
       alert('내용을 입력해주세요.');
     }
