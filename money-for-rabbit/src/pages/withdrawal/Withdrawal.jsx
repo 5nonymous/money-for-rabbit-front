@@ -1,18 +1,53 @@
 /** @jsxImportSource @emotion/react */
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import common from '../../styles/common';
 import Input from '../../components/input/Input';
 import BoxButton from '../../components/button/BoxButton';
+import commonAxios from '../../utils/commonAxios';
+import axios from 'axios';
+import getUserNumber from '../../utils/getUserNumber';
 
 function Withdrawal() {
+  const [inputUsername, setInputUsername] = useState('');
+  const navigate = useNavigate();
+
+  const changeHandlerUsername = (e) => {
+    setInputUsername(e.target.value);
+  };
+
   const onClickCancel = () => {
-    alert('취소');
+    navigate(`/user/${getUserNumber()}`);
   };
 
   const onClickWithdrawal = () => {
-    alert('탈퇴');
+    commonAxios
+      .get(`user/${getUserNumber()}`)
+      .then((res) => {
+        const username = res.data.user_info.username;
+        console.log('user', { username });
+        if (username === inputUsername) {
+          axios
+            .delete('http://tgoddessana.pythonanywhere.com/api/user/withdraw', {
+              headers: {
+                'Content-Type': `application/json`,
+                Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+              },
+              data: { username },
+            })
+            .then(() => {
+              alert('탈퇴했습니다');
+              navigate('/withdrawal/done');
+            })
+            .catch((err) => console.log(err.response.data));
+        } else {
+          alert('닉네임을 다시한번 확인해주세요.');
+          setInputUsername('');
+        }
+      })
+      .catch((err) => console.log(err.response.data.error));
   };
 
   return (
@@ -28,7 +63,13 @@ function Withdrawal() {
           탈퇴하시려면 <span>[닉네임]</span>을 입력해주세요.
         </p>
       </div>
-      <Input type={'text'} style={'nickname'} placeholder={'닉네임 입력'} />
+      <Input
+        type={'text'}
+        style={'nickname'}
+        placeholder={'닉네임 입력'}
+        onChange={changeHandlerUsername}
+        value={inputUsername}
+      />
       <div css={buttonWrapper}>
         <BoxButton half onClick={onClickCancel}>
           안할래요
