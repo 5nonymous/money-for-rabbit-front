@@ -76,7 +76,7 @@ function Modal({ close, type }) {
   };
 
   const onClickWithdrawal = () => {
-    alert('탈퇴');
+    navigate('/withdrawal');
   };
 
   const onClickLogOut = () => {
