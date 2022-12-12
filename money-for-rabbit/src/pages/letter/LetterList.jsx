@@ -10,16 +10,15 @@ import TextButton from '../../components/button/TextButton';
 import Box from './Box';
 
 import commonAxios from '../../utils/commonAxios';
+import getUserNumber from '../../utils/getUserNumber';
 
 function LetterList() {
-  const userId = 12;
-
   const [data, setData] = useState();
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     commonAxios
-      .get(`user/${userId}/messages?page=${page}`)
+      .get(`user/${getUserNumber()}/messages?page=${page}`)
       .then((res) => {
         setData(res.data);
       })
