@@ -19,7 +19,7 @@ function WriteMessage() {
     e.preventDefault();
     const inputMessage = e.target[0].value;
 
-    if (inputMessage) {
+    if (inputMessage.trim()) {
       const data = {
         message: inputMessage,
         amount: +selectedMoney,
