@@ -4,12 +4,12 @@ import React from 'react';
 import { css } from '@emotion/react';
 import common from '../../styles/common';
 
-function BoxButton({ children, type, onClick, half, light, user, icon }) {
+function BoxButton({ children, type, onClick, half, light, user, icon, size }) {
   const buttonStyles = [boxButtonBase];
 
   if (user || icon) {
     buttonStyles.push(user && username);
-    buttonStyles.push(icon && squareIcon);
+    buttonStyles.push(icon && squareIcon(size));
   } else {
     buttonStyles.push(half ? halfWidth : fullWidth);
     buttonStyles.push(light ? bgLight : bgDark);
@@ -77,10 +77,10 @@ const bgLight = css`
   color: ${common.color.brown4};
 `;
 
-const squareIcon = css`
-  width: 70px;
-  height: 70px;
+const squareIcon = (size) => css`
+  width: ${size || 70}px;
+  height: ${size || 70}px;
 
   ${bgDark}
-  ${common.fontSize[40]}
+  ${common.fontSize[size ? 30 : 40]}
 `;

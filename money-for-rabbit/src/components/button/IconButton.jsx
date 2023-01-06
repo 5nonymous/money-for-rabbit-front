@@ -7,7 +7,7 @@ import BoxButton from './BoxButton';
 
 function IconButton({ onClick, capture, share }) {
   return (
-    <BoxButton icon onClick={onClick}>
+    <BoxButton icon onClick={onClick} size={share ? 50 : 70}>
       {capture && <FontAwesomeIcon icon={faCamera} />}
       {share && <FontAwesomeIcon icon={faShareNodes} />}
     </BoxButton>
