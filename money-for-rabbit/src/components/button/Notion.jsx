@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import common from '../../styles/common';
 
 function Notion() {
-  const notionLink = 'https://www.notion.so/curvy-fennel-ebf/94943557b00f40d2aed45507c921cf12';
+  const notionLink = 'https://curvy-fennel-ebf.notion.site/Money-For-Rabbit-c31138ac2742469cb8f93c79647f9cf4';
 
   return (
     <a css={link} href={notionLink} target='_blank' rel='noreferrer'>
