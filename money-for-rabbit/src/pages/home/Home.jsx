@@ -9,6 +9,7 @@ import Modal from '../../components/modal/Modal';
 
 function Home() {
   const [isModal, setIsModal] = useState(false);
+  const rabbitImageURL = process.env.PUBLIC_URL + '/images/Rabbit_NoBackground_Default3.png';
 
   const openModal = () => {
     setIsModal(true);
@@ -30,11 +31,11 @@ function Home() {
   return (
     <div css={wrapper} onClick={onClickScreen}>
       <svg css={svgStyle({ isModal })}>
-        <text css={svgText} x="10" y="40">
+        <text css={svgText} x='10' y='40'>
           화면을 터치하세요
         </text>
       </svg>
-      <div css={rabbit} />
+      <div css={rabbit(rabbitImageURL)} />
       <div css={notionWrapper}>
         <Notion />
       </div>
@@ -129,14 +130,13 @@ const svgText = css`
   paint-order: stroke;
 `;
 
-const rabbit = css`
+const rabbit = (url) => css`
   width: 262px;
   height: 500px;
   position: absolute;
   left: 47px;
   bottom: 60px;
-  background: url('./images/Rabbit_NoBackground_Default3.png') center/cover
-    no-repeat;
+  background: url(${url}) center/cover no-repeat;
 `;
 
 const notionWrapper = css`
