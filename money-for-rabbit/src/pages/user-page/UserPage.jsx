@@ -8,6 +8,7 @@ import common from '../../styles/common';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getBackgroundImage, getRabbitImage } from '../../utils/getDynamicImage';
 import Modal from '../../components/modal/Modal';
+import TextButton from '../../components/button/TextButton';
 
 function UserPage() {
   const accessToken = localStorage.getItem('accessToken') || '';
@@ -40,7 +41,11 @@ function UserPage() {
           if (error.response.status === 404) {
             setView(
               <>
-                <div css={errorText}>사용자를 찾을 수 없습니다.</div>
+                <div css={errorText}>
+                  <div>사용자를 찾을 수 없습니다.</div>
+                  <TextButton label={'메인으로'} onClick={() => navigate('/')} />
+                </div>
+
                 <div css={rabbitImage(1)} />
               </>
             );
@@ -49,7 +54,7 @@ function UserPage() {
     } else {
       setView(<Modal type={'signIn'} />);
     }
-  }, [userId, accessToken]);
+  }, [userId, accessToken, navigate]);
 
   useEffect(() => {
     localStorage.setItem('time', time);
@@ -251,4 +256,8 @@ const errorText = css`
   color: ${common.color.brown5};
 
   z-index: 1;
+
+  div {
+    margin: 10px 0;
+  }
 `;
