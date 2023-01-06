@@ -9,10 +9,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getBackgroundImage, getRabbitImage } from '../../utils/getDynamicImage';
 import Modal from '../../components/modal/Modal';
 import TextButton from '../../components/button/TextButton';
+import IconButton from '../../components/button/IconButton';
 
 function UserPage() {
   const accessToken = localStorage.getItem('accessToken') || '';
-  const [time, setTime] = useState(localStorage.getItem('time') ? localStorage.getItem('time') : '09:00');
 
   const navigate = useNavigate();
   const { userId } = useParams();
@@ -56,10 +56,6 @@ function UserPage() {
     }
   }, [userId, accessToken, navigate]);
 
-  useEffect(() => {
-    localStorage.setItem('time', time);
-  }, [time]);
-
   function handleClick() {
     if (isOthersPage) {
       navigate(`/user/${userId}/new`);
@@ -68,18 +64,10 @@ function UserPage() {
     }
   }
 
-  function handleTimeSettingBtn() {
-    const timeArr = ['09:00', '18:00', '00:00'];
-    const time = localStorage.getItem('time');
-
-    if (time === timeArr[0]) {
-      setTime(timeArr[1]);
-    } else if (time === timeArr[1]) {
-      setTime(timeArr[2]);
-    } else {
-      setTime(timeArr[0]);
-    }
-    window.location.reload();
+  function onClickShareBtn() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('링크 복사 완료');
+    });
   }
 
   return (
@@ -103,9 +91,9 @@ function UserPage() {
                   {isOthersPage ? '을 모았어요.' : '이 모였어요.'}
                 </div>
               </div>
-              <div css={timeSettingWrapper}>
-                <div css={timeSettingBtn} onClick={handleTimeSettingBtn} />
-                <span>{time}</span>
+
+              <div css={shareBtnWrapper}>
+                <IconButton share onClick={onClickShareBtn} />
               </div>
 
               <div css={rabbitImage(+totalAmount)}>
@@ -178,26 +166,11 @@ const userSettingBtn = css`
   }
 `;
 
-const timeSettingWrapper = css`
-  width: 58px;
-  height: fit-content;
+const shareBtnWrapper = css`
   position: absolute;
-  top: 25px;
-  right: 28px;
-  ${common.align.centerColumn};
-
-  span {
-    ${common.fontSize[12]};
-    ${common.fontWeight.medium};
-  }
-`;
-
-const timeSettingBtn = css`
-  width: 58px;
-  height: 71px;
-  background: url('/images/time_setting_button_icon.png') no-repeat center/cover;
+  top: 37px;
+  right: 25px;
   z-index: 1;
-  cursor: pointer;
 `;
 
 const rabbitImage = (money) => css`
