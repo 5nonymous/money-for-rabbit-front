@@ -36,6 +36,7 @@ function UserPage() {
 
           setUsername(username);
           setTotalAmount(total_amount);
+          setView('');
         })
         .catch((error) => {
           if (error.response.status === 404) {
