@@ -9,7 +9,8 @@ import Modal from '../../components/modal/Modal';
 
 function Home() {
   const [isModal, setIsModal] = useState(false);
-  const rabbitImageURL = process.env.PUBLIC_URL + '/images/Rabbit_NoBackground_Default3.png';
+  const rabbitImageURL =
+    process.env.PUBLIC_URL + '/images/Rabbit_NoBackground_Default3.png';
 
   const openModal = () => {
     setIsModal(true);
@@ -30,11 +31,13 @@ function Home() {
 
   return (
     <div css={wrapper} onClick={onClickScreen}>
-      <svg css={svgStyle({ isModal })}>
-        <text css={svgText} x='10' y='40'>
-          화면을 터치하세요
-        </text>
-      </svg>
+      <div css={svgWrapper}>
+        <svg css={svgStyle({ isModal })}>
+          <text css={svgText} x="10" y="40">
+            화면을 터치하세요
+          </text>
+        </svg>
+      </div>
       <div css={rabbit(rabbitImageURL)} />
       <div css={notionWrapper}>
         <Notion />
@@ -107,14 +110,19 @@ const wrapper = css`
   background: url(${getBackgroundImage()}) center/cover;
 `;
 
+const svgWrapper = css`
+  width: 100%;
+  height: fit-content;
+  ${common.align.centerRow};
+`;
+
 const svgStyle = (props) => css`
-  width: 280px;
+  width: 260px;
   height: 50px;
   ${common.fontSize[30]};
   ${common.fontWeight.bolder};
   position: absolute;
   top: 30px;
-  left: 80px;
   animation: ${props.isModal
     ? ''
     : css`
