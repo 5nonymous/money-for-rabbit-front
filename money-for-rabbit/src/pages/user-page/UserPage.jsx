@@ -23,45 +23,48 @@ function UserPage() {
   const [username, setUsername] = useState();
   const [totalAmount, setTotalAmount] = useState();
 
-  const [modal, setModal] = useState(false);
+  const [profileModal, setProfileModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
 
   const [view, setView] = useState();
 
   useEffect(() => {
-    if (accessToken) {
-      commonAxios
-        .get(`user/${userId}`)
-        .then((response) => {
-          const { username, total_amount } = response.data.user_info;
+    commonAxios
+      .get(`user/${userId}`)
+      .then((response) => {
+        const { username, total_amount } = response.data.user_info;
 
-          setUsername(username);
-          setTotalAmount(total_amount);
-          setView('');
-        })
-        .catch((error) => {
-          if (error.response.status === 404) {
-            setView(
-              <>
-                <div css={errorText}>
-                  <div>사용자를 찾을 수 없습니다.</div>
-                  <TextButton label={'메인으로'} onClick={() => navigate('/')} />
-                </div>
+        setUsername(username);
+        setTotalAmount(total_amount);
+        setView('');
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          setView(
+            <>
+              <div css={errorText}>
+                <div>사용자를 찾을 수 없습니다.</div>
+                <TextButton label={'메인으로'} onClick={() => navigate('/')} />
+              </div>
 
-                <div css={rabbitImage(1)} />
-              </>
-            );
-          }
-        });
-    } else {
-      setView(<Modal type={'signIn'} />);
-    }
+              <div css={rabbitImage(1)} />
+            </>
+          );
+        } else {
+          alert(error.response.data.error);
+        }
+      });
   }, [userId, accessToken, navigate]);
 
   function handleClick() {
-    if (isOthersPage) {
-      navigate(`/user/${userId}/new`);
+    if (accessToken) {
+      if (isOthersPage) {
+        navigate(`/user/${userId}/new`);
+      } else {
+        navigate(`/user/${userId}/letters`);
+      }
     } else {
-      navigate(`/user/${userId}/letters`);
+      setLoginModal(true);
     }
   }
 
@@ -83,7 +86,7 @@ function UserPage() {
                     <span>{username} 님은</span>
                   ) : (
                     <div css={userSettingBtn}>
-                      <span onClick={() => setModal(true)}>{username}</span> 님
+                      <span onClick={() => setProfileModal(true)}>{username}</span> 님
                     </div>
                   )}
                 </div>
@@ -108,7 +111,8 @@ function UserPage() {
                 </div>
               </div>
 
-              {modal && <Modal type={'profile'} close={() => setModal(false)} />}
+              {profileModal && <Modal type={'profile'} close={() => setProfileModal(false)} />}
+              {!accessToken && loginModal && <Modal type={'signIn'} close={() => setLoginModal(false)} />}
             </>
           )}
     </div>
