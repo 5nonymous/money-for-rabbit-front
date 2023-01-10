@@ -112,7 +112,7 @@ function UserPage() {
               </div>
 
               {profileModal && <Modal type={'profile'} close={() => setProfileModal(false)} />}
-              {loginModal && <Modal type={'signIn'} close={() => setLoginModal(false)} />}
+              {!accessToken && loginModal && <Modal type={'signIn'} close={() => setLoginModal(false)} />}
             </>
           )}
     </div>
