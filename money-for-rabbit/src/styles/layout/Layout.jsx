@@ -6,12 +6,14 @@ import { css } from '@emotion/react';
 function Layout({ page }) {
   return (
     <div css={wrapper}>
-      <video css={video} autoPlay loop muted>
-        <source
-          src={process.env.PUBLIC_URL + '/background_video.mp4'}
-          type="video/mp4"
-        />
-      </video>
+      {!/Android|iPhone/i.test(navigator.userAgent) && (
+        <video css={video} autoPlay loop muted>
+          <source
+            src={process.env.PUBLIC_URL + '/background_video.mp4'}
+            type="video/mp4"
+          />
+        </video>
+      )}
       <div css={container} id="container">
         {page}
       </div>
