@@ -2,13 +2,17 @@
 
 import React, { useState } from 'react';
 import { css, keyframes } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
 import common from '../../styles/common';
 import Notion from '../../components/button/Notion';
 import { getBackgroundImage } from '../../utils/getDynamicImage';
+import getUserNumber from '../../utils/getUserNumber';
 import Modal from '../../components/modal/Modal';
 
 function Home() {
   const [isModal, setIsModal] = useState(false);
+  const navigate = useNavigate();
+
   const rabbitImageURL =
     process.env.PUBLIC_URL + '/images/Rabbit_NoBackground_Default3.png';
 
@@ -22,10 +26,10 @@ function Home() {
 
   const onClickScreen = (e) => {
     if (e.target === e.currentTarget) {
-      // TODO: 클릭 시 화면전환 수정 필요
-      //     // 로그인이 되어 있으면 마이페이지
-      //     // 로그인이 안 되어 있으면 로그인 모달
-      openModal();
+      localStorage.getItem('accessToken')
+        ? navigate(`/user/${getUserNumber()}`)
+        : openModal();
+      navigate(`/user/${getUserNumber()}`);
     }
   };
 
