@@ -32,13 +32,13 @@ function Home() {
   return (
     <div css={wrapper} onClick={onClickScreen}>
       <div css={svgWrapper}>
-        <svg css={svgStyle({ isModal })}>
-          <text css={svgText} x="10" y="40">
+        <svg css={svgStyle({ isModal })} onClick={onClickScreen}>
+          <text css={svgText} x="10" y="40" onClick={onClickScreen}>
             화면을 터치하세요
           </text>
         </svg>
       </div>
-      <div css={rabbit(rabbitImageURL)} />
+      <div css={rabbit(rabbitImageURL)} onClick={onClickScreen} />
       <div css={notionWrapper}>
         <Notion />
       </div>
