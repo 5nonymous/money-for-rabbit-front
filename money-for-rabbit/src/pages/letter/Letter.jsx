@@ -21,23 +21,31 @@ function Letter() {
   const userId = pathname.split('/')[2];
   const letterId = pathname.split('/')[4];
 
-  axios.get(`http://tgoddessana.pythonanywhere.com/api/user/${userId}`).then((res) => {
-    setUsername(res.data.user_info.username);
-  });
+  axios
+    .get(`http://tgoddessana.pythonanywhere.com/api/user/${userId}`)
+    .then((res) => {
+      setUsername(res.data.user_info.username);
+    });
 
   useEffect(() => {
-    axios.get(`http://tgoddessana.pythonanywhere.com/api/user/${userId}/messages/${letterId}`).then((res) => {
-      console.log('res', res);
-      setData(res.data);
-    });
+    axios
+      .get(
+        `http://tgoddessana.pythonanywhere.com/api/user/${userId}/messages/${letterId}`
+      )
+      .then((res) => {
+        console.log('res', res);
+        setData(res.data);
+      });
   }, []);
 
   const onClickCaptureBtn = () => {
     document.getElementById('prevBtn').style.opacity = 0;
+    document.getElementById('captureBtn').style.opacity = 0;
     html2canvas(document.getElementById('container')).then((canvas) => {
       onSave(canvas.toDataURL('image/png'), 'money-for-rabbit-download.png');
     });
     document.getElementById('prevBtn').style.opacity = 1;
+    document.getElementById('captureBtn').style.opacity = 1;
 
     const onSave = (uri, filename) => {
       const link = document.createElement('a');
@@ -51,14 +59,21 @@ function Letter() {
 
   return (
     <div css={wrapper}>
-      <div css={textButtonWrapper} id='prevBtn'>
+      <div css={textButtonWrapper} id="prevBtn">
         <TextButton label={'이전'} onClick={() => navigate(-1)} />
       </div>
       <h1>{username} 님이 받은 세뱃돈 입니다.</h1>
       <div css={lettersWrapper}>
-        {data && <Box size={'big'} writer={data.author_name} contents={data.message} priceImg={data.image_name} />}
+        {data && (
+          <Box
+            size={'big'}
+            writer={data.author_name}
+            contents={data.message}
+            priceImg={data.image_name}
+          />
+        )}
       </div>
-      <div css={btnWrapper}>
+      <div css={btnWrapper} id="captureBtn">
         <IconButton capture onClick={onClickCaptureBtn} />
       </div>
     </div>
