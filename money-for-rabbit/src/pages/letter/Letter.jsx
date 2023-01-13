@@ -41,9 +41,11 @@ function Letter() {
   const onClickCaptureBtn = () => {
     document.getElementById('prevBtn').style.opacity = 0;
     document.getElementById('captureBtn').style.opacity = 0;
+
     html2canvas(document.getElementById('container')).then((canvas) => {
       onSave(canvas.toDataURL('image/png'), 'money-for-rabbit-download.png');
     });
+
     document.getElementById('prevBtn').style.opacity = 1;
     document.getElementById('captureBtn').style.opacity = 1;
 
@@ -82,7 +84,7 @@ function Letter() {
 
 export default Letter;
 const wrapper = css`
-  width: 100%;
+  width: 390px;
   height: 100%;
   position: relative;
   ${common.align.centerColumn};
