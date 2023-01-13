@@ -14,6 +14,7 @@ function WriteMessage() {
   const location = useLocation();
   const [selectedMoney, setSelectedMoney] = useState();
   const [isMoneyBag, setIsMoneyBag] = useState();
+  const [message, setMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,6 +41,13 @@ function WriteMessage() {
     }
   };
 
+  const handleChangeInput = (e) => {
+    if (e.target.value.length > 150) {
+      e.target.value = e.target.value.slice(0, 150);
+    }
+    setMessage(e.target.value);
+  };
+
   useEffect(() => {
     if (location.state) {
       setSelectedMoney(location.state.money);
@@ -57,7 +65,8 @@ function WriteMessage() {
         <form css={inputWrapper} onSubmit={handleSubmit}>
           <div>
             <p css={label}>덕담을 남겨주세요</p>
-            <textarea css={messageInput} />
+            <textarea css={messageInput} value={message} onChange={handleChangeInput} maxLength={150} />
+            <span>({message.length}/150)</span>
           </div>
 
           <BoxButton type={'submit'}>완료</BoxButton>
@@ -90,14 +99,23 @@ const PrevButton = (props) => (
 
 const inputWrapper = css`
   height: calc(100% - 78px);
+  max-height: 700px;
   ${common.align.centerColumn};
   justify-content: space-between;
 
   & > div {
+    position: relative;
     height: calc(100% - 110px);
     ${common.align.centerColumn};
     justify-content: space-between;
     gap: 16px;
+  }
+
+  & > div > span {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: ${common.color.brown4};
   }
 `;
 

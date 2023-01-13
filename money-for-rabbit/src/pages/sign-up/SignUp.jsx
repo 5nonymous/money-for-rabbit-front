@@ -13,18 +13,63 @@ import Modal from '../../components/modal/Modal';
 function SignUp() {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
+  const [message, setMessage] = useState({});
+  const [isInput, setIsInput] = useState(false);
+  const [userData, setUserData] = useState({
+    email: '',
+    username: '',
+    password: '',
+    passwordCheck: '',
+  });
+  const messages = {
+    email: '인증 메일을 받을 수 있는 주소를 입력해주세요.',
+    username: '닉네임은 2~7자만 가능합니다.',
+    passwordChar: '비밀번호는 대문자와 특수기호를 포함해야합니다.',
+    passwordLength: '비밀번호는 12~16자만 가능합니다.',
+    passwordCheck: '비밀번호가 일치하지 않습니다.',
+  };
+  const pwRegex =
+    /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[`~!@#$%^&*()\-_=+|[\]\\{};:'",.<>/?])[A-Za-z0-9`~!@#$%^&*()\-_=+|[\]\\{};:'",.<>/?]{12,16}/;
+
+  const handleChangeInput = (e) => {
+    const { id, value } = e.target;
+
+    setUserData((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }));
+
+    if (id === 'email') {
+      setMessage({ [id]: messages[id] });
+    } else if (id === 'username') {
+      if (value.length < 2 || value.length > 7) {
+        setMessage({ [id]: messages[id] });
+      }
+    } else if (id === 'password') {
+      if (value.length < 12 || value.length > 16) {
+        setMessage({ [id]: messages['passwordLength'] });
+      } else if (!pwRegex.test(value)) {
+        setMessage({ [id]: messages['passwordChar'] });
+      } else {
+        setMessage({});
+      }
+    } else if (id === 'passwordCheck') {
+      setIsInput(true);
+      setMessage({});
+    } else {
+      setMessage({});
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const keys = ['email', 'username', 'password', 'passwordCheck'];
+    const keys = ['email', 'username', 'password'];
     let data = {};
 
     keys.map((key, id) => (data[key] = e.target[id].value));
 
-    if (data.password === data.passwordCheck) {
-      delete data.passwordCheck;
-
+    if (userData.password === userData.passwordCheck) {
       axios
         .post('http://tgoddessana.pythonanywhere.com/api/user/register', data)
         .then((response) => {
@@ -47,12 +92,55 @@ function SignUp() {
 
         <form css={flexCenterCol(25)} onSubmit={handleSubmit}>
           <div css={flexCenterCol(10)}>
-            <Input type={'email'} style={'sign'} placeholder={'이메일 주소'} />
-            <p css={regularText(16)}>인증 메일을 받을 수 있는 주소를 입력해주세요.</p>
+            <Input
+              id={'email'}
+              value={userData.email}
+              onChange={handleChangeInput}
+              type={'email'}
+              style={'sign'}
+              placeholder={'이메일 주소'}
+            />
+            {message['email'] && <p css={regularText(16)}>{message['email']}</p>}
           </div>
-          <Input type={'text'} style={'sign'} placeholder={'닉네임'} />
-          <Input type={'password'} style={'sign'} placeholder={'비밀번호'} />
-          <Input type={'password'} style={'sign'} placeholder={'비밀번호 확인'} />
+
+          <div css={flexCenterCol(10)}>
+            <Input
+              id={'username'}
+              value={userData.username}
+              onChange={handleChangeInput}
+              type={'text'}
+              style={'sign'}
+              placeholder={'닉네임'}
+              maxLength={7}
+            />
+            {message['username'] && <p css={regularText(16)}>{message['username']}</p>}
+          </div>
+
+          <div css={flexCenterCol(10)}>
+            <Input
+              id={'password'}
+              value={userData.password}
+              onChange={handleChangeInput}
+              type={'password'}
+              style={'sign'}
+              placeholder={'비밀번호'}
+            />
+            {message['password'] && <p css={regularText(16)}>{message['password']}</p>}
+          </div>
+
+          <div css={flexCenterCol(10)}>
+            <Input
+              id={'passwordCheck'}
+              value={userData.passwordCheck}
+              onChange={handleChangeInput}
+              type={'password'}
+              style={'sign'}
+              placeholder={'비밀번호 확인'}
+            />
+            {isInput && userData.password !== userData.passwordCheck && (
+              <p css={regularText(16)}>{messages['passwordCheck']}</p>
+            )}
+          </div>
 
           <BoxButton type={'submit'}>회원가입</BoxButton>
         </form>
