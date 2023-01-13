@@ -16,6 +16,7 @@ import WriteMessage from './pages/user-page/WriteMessage';
 import LetterList from './pages/letter/LetterList';
 import Letter from './pages/letter/Letter';
 import AuthenticationFailed from './pages/sign-up/AuthenticationFailed';
+import Admin from './pages/admin/Admin';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         />
         <Route path="/withdrawal" element={<Layout page={<Withdrawal />} />} />
         <Route path="/withdrawal/done" element={<Layout page={<Done />} />} />
+        <Route path="/mfr-admin" element={<Admin />} />
         <Route path="/*" element={<Layout page={<NotFound />} />} />
       </Routes>
     </BrowserRouter>
