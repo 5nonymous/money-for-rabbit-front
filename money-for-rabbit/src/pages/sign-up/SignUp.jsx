@@ -9,12 +9,14 @@ import Input from '../../components/input/Input';
 import BoxButton from '../../components/button/BoxButton';
 import Notion from '../../components/button/Notion';
 import Modal from '../../components/modal/Modal';
+import Agreement from './Agreement';
 
 function SignUp() {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   const [message, setMessage] = useState({});
   const [isInput, setIsInput] = useState(false);
+  const [agreementInfo, setAgreementInfo] = useState(true);
   const [userData, setUserData] = useState({
     email: '',
     username: '',
@@ -102,7 +104,6 @@ function SignUp() {
             />
             {message['email'] && <p css={regularText(16)}>{message['email']}</p>}
           </div>
-
           <div css={flexCenterCol(10)}>
             <Input
               id={'username'}
@@ -115,7 +116,6 @@ function SignUp() {
             />
             {message['username'] && <p css={regularText(16)}>{message['username']}</p>}
           </div>
-
           <div css={flexCenterCol(10)}>
             <Input
               id={'password'}
@@ -127,7 +127,6 @@ function SignUp() {
             />
             {message['password'] && <p css={regularText(16)}>{message['password']}</p>}
           </div>
-
           <div css={flexCenterCol(10)}>
             <Input
               id={'passwordCheck'}
@@ -157,6 +156,7 @@ function SignUp() {
         </div>
       </div>
       {modal && <Modal type={'signIn'} close={() => setModal(false)} />}
+      {agreementInfo && <Agreement close={() => setAgreementInfo(false)} />}
     </div>
   );
 }
@@ -184,7 +184,7 @@ const boldText = css`
 
 const regularText = (size) => css`
   ${common.fontSize[size]}
-  ${common.fontWeight.midium}
+  ${common.fontWeight.medium}
 `;
 
 const lineStyle = css`
