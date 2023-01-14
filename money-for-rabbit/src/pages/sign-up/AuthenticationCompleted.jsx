@@ -33,6 +33,7 @@ function AuthenticationCompleted() {
 export default AuthenticationCompleted;
 
 const flexCenterColumn = css`
+  background-color: ${common.color.white};
   width: 100%;
   height: 100%;
   min-height: 700px;
