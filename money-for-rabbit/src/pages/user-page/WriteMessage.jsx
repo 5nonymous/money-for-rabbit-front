@@ -79,8 +79,10 @@ function WriteMessage() {
 export default WriteMessage;
 
 const wrapper = css`
+  background-color: ${common.color.white};
   width: 100%;
   height: calc(100% - 50px);
+  min-height: 500px;
 `;
 
 const prevBtn = css`
@@ -102,6 +104,7 @@ const inputWrapper = css`
   max-height: 700px;
   ${common.align.centerColumn};
   justify-content: space-between;
+  padding-bottom: 30px;
 
   & > div {
     position: relative;
