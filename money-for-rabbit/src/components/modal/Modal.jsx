@@ -41,6 +41,7 @@ function Modal({ close, type }) {
       .then((res) => {
         console.log(res);
         localStorage.setItem('accessToken', res.data.access_token);
+        localStorage.setItem('refreshToken', res.data.refresh_token);
 
         navigate(`/user/${getUserNumber()}`);
       })
