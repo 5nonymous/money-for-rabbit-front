@@ -168,6 +168,7 @@ const background = css`
   width: 390px;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
+  z-index: 2;
 `;
 
 const wrapper = (props) => css`
