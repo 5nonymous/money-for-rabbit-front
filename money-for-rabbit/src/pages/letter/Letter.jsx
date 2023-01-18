@@ -33,7 +33,6 @@ function Letter() {
         `http://tgoddessana.pythonanywhere.com/api/user/${userId}/messages/${letterId}`
       )
       .then((res) => {
-        console.log('res', res);
         setData(res.data);
       });
   }, []);
