@@ -9,9 +9,6 @@ import { getMoneyImage } from '../../utils/getDynamicImage';
 
 function Box({ size, writer, priceImg, contents, messageId, userId }) {
   const navigate = useNavigate();
-  console.log('getMoneyImage(priceImg)', getMoneyImage(priceImg));
-  console.log('messageId :>> ', messageId);
-  console.log('userId :>> ', userId);
 
   const onClickBtn = () => {
     navigate(`/user/${userId}/letters/${messageId}`);
