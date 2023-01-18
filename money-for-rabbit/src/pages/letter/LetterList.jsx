@@ -13,20 +13,71 @@ import Box from './Box';
 import commonAxios from '../../utils/commonAxios';
 import getUserNumber from '../../utils/getUserNumber';
 
+import PageNum from './PageNum';
+
 function LetterList() {
   const navigate = useNavigate();
 
   const [data, setData] = useState();
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const [pageGroup, setPageGroup] = useState(1);
+
+  const PAGE_LIMIT = 6;
+  const pageCount = 3;
 
   useEffect(() => {
     commonAxios
-      .get(`user/${getUserNumber()}/messages?page=${page}`)
+      .get(`user/${getUserNumber()}/messages?page=${currentPage}`)
       .then((res) => {
         setData(res.data);
+        setTotalPage(Math.ceil(res.data['message_set_count'] / PAGE_LIMIT));
+        setPageGroup(Math.ceil(currentPage / pageCount));
       })
+
       .catch((err) => console.log(err.response.data.error));
-  }, [page]);
+  }, [currentPage]);
+
+  const pagination = () => {
+    let lastNumber = pageGroup * pageCount;
+
+    if (lastNumber > totalPage) {
+      lastNumber = totalPage;
+    }
+
+    let firstNumber = lastNumber - (pageCount - 1);
+    let pageNumList = [];
+
+    const next = lastNumber + 1;
+    const prev = firstNumber - 1;
+    const prevBtn = (
+      <Icon icon={faAngleLeft} onClick={() => setCurrentPage(prev)} />
+    );
+    const nextBtn = (
+      <Icon icon={faAngleRight} onClick={() => setCurrentPage(next)} />
+    );
+
+    for (let num = firstNumber; num <= lastNumber; num++) {
+      pageNumList.push(
+        <PageNum
+          key={num}
+          pageNum={num}
+          isCurrent={currentPage === num}
+          onClick={() => {
+            setCurrentPage(num);
+          }}
+        />
+      );
+    }
+
+    return (
+      <div css={paginationWrapper}>
+        {prev > 0 && prevBtn}
+        {pageNumList}
+        {lastNumber < totalPage && nextBtn}
+      </div>
+    );
+  };
 
   return (
     <div css={wrapper}>
@@ -50,19 +101,8 @@ function LetterList() {
               );
             })}
           </div>
-          <div css={paginationWrapper}>
-            <Icon
-              icon={faAngleLeft}
-              state={data.prev}
-              onClick={() => setPage((prev) => prev - 1)}
-            />
-            {page}
-            <Icon
-              icon={faAngleRight}
-              state={data.next}
-              onClick={() => setPage((prev) => prev + 1)}
-            />
-          </div>
+
+          {pagination()}
         </>
       )}
     </div>
@@ -104,18 +144,16 @@ const lettersWrapper = css`
 `;
 
 const paginationWrapper = css`
+  width: 250px;
+  height: fit-content;
   position: absolute;
   bottom: 49px;
   ${common.align.centerRow};
-  gap: 5px;
-  ${common.fontSize[40]};
+  gap: 20px;
+  ${common.fontSize[24]};
   color: ${common.color.brown3};
-
-  svg {
-    cursor: pointer;
-  }
 `;
 
 const Icon = styled(FontAwesomeIcon)`
-  visibility: ${(props) => (props.state ? 'visible' : 'hidden')};
+  cursor: pointer;
 `;
