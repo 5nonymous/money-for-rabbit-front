@@ -29,7 +29,6 @@ function Home() {
       localStorage.getItem('accessToken')
         ? navigate(`/user/${getUserNumber()}`)
         : openModal();
-      navigate(`/user/${getUserNumber()}`);
     }
   };
 
