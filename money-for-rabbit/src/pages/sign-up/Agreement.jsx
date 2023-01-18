@@ -14,62 +14,64 @@ function Agreement({ close }) {
   }
 
   return (
-    <div css={background}>
-      <div css={document}>
-        <div css={header}>
-          <div>개인정보 수집·이용 동의</div>
-          <div onClick={() => navigate('/')}>✕</div>
-        </div>
-
-        <div css={contents}>
-          <p>Money For Rabbit은 서비스 홍보를 위해 아래와 같이 개인정보를 수집·이용합니다.</p>
-
-          <table>
-            <thead>
-              <tr>
-                <th>수집 목적</th>
-                <th>수집 항목</th>
-                <th>보유·이용 기간</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  회원 식별 및<br />
-                  홍보 이메일 발송
-                  <br />
-                  (2회)
-                </td>
-                <td>이메일</td>
-                <td>
-                  회원 탈퇴 또는
-                  <br />
-                  서비스 종료 시까지
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <li>
-            귀하는 Money For Rabbit 서비스 이용에 필요한 최소한의 개인정보 수집·이용에 동의하지 않을 수 있으나, 동의를
-            거부 할 경우 회원제 서비스 이용이 불가합니다.
-          </li>
-
-          <div css={agreement}>
-            <p>위 개인정보 수집·이용에 동의합니다.(필수)</p>
-
-            <div>
-              <input type='checkbox' id='agree' onChange={handleCheck} />
-              <label htmlFor='agree'></label>
-              <p>동의함</p>
-            </div>
+    <div css={wrapper}>
+      <div css={background}>
+        <div css={document}>
+          <div css={header}>
+            <div>개인정보 수집·이용 동의</div>
+            <div onClick={() => navigate('/')}>✕</div>
           </div>
 
-          {isAgree && (
-            <div css={nextButton}>
-              <div onClick={() => close()}>다음으로 〉</div>
+          <div css={contents}>
+            <p>Money For Rabbit은 서비스 홍보를 위해 아래와 같이 개인정보를 수집·이용합니다.</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>수집 목적</th>
+                  <th>수집 항목</th>
+                  <th>보유·이용 기간</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    회원 식별 및<br />
+                    홍보 이메일 발송
+                    <br />
+                    (2회)
+                  </td>
+                  <td>이메일</td>
+                  <td>
+                    회원 탈퇴 또는
+                    <br />
+                    서비스 종료 시까지
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <li>
+              귀하는 Money For Rabbit 서비스 이용에 필요한 최소한의 개인정보 수집·이용에 동의하지 않을 수 있으나, 동의를
+              거부 할 경우 회원제 서비스 이용이 불가합니다.
+            </li>
+
+            <div css={agreement}>
+              <p>위 개인정보 수집·이용에 동의합니다.(필수)</p>
+
+              <div>
+                <input type='checkbox' id='agree' onChange={handleCheck} />
+                <label htmlFor='agree'></label>
+                <p>동의함</p>
+              </div>
             </div>
-          )}
+
+            {isAgree && (
+              <div css={nextButton}>
+                <div onClick={() => close()}>다음으로 〉</div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -78,11 +80,19 @@ function Agreement({ close }) {
 
 export default Agreement;
 
+const wrapper = css`
+  width: 100vw;
+  height: 100vh;
+  ${common.align.centerRow}
+  position: fixed;
+`;
+
 const background = css`
   background-color: rgba(0, 0, 0, 0.5);
   width: 390px;
-  height: 100%;
+  height: 100vh;
   position: fixed;
+  top: 0;
   ${common.align.centerColumn}
 `;
 
@@ -149,10 +159,10 @@ const agreement = css`
     &::after {
       content: '✓';
       position: absolute;
-      top: -5px;
-      left: 1px;
+      top: -8px;
+      left: -1px;
       color: ${common.color.white};
-      font-size: 24px;
+      font-size: 20px;
     }
   }
 
