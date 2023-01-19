@@ -158,6 +158,7 @@ const agreement = css`
     background-color: ${common.color.brown4};
 
     &::after {
+      font-family: 'BMDOHYEON';
       content: '\u2713';
       position: absolute;
       top: -8px;
