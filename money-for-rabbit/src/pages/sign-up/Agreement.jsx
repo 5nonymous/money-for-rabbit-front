@@ -156,12 +156,14 @@ const agreement = css`
     background-color: ${common.color.brown4};
 
     &::after {
-      font-family: 'BMDOHYEON';
-      content: '\u2713';
+      content: '';
+      width: 16px;
+      height: 16px;
+      background: url('/images/check.svg') no-repeat center/cover;
+      background-position: -1px -1px;
       position: absolute;
-      top: -8px;
-      left: -1px;
-      color: ${common.color.white};
+      top: 0px;
+      left: 0px;
       font-size: 20px;
     }
   }
