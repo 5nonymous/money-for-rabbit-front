@@ -9,15 +9,13 @@ commonAxios.interceptors.request.use((config) => {
 
   if (!token) {
     config.headers['Authorization'] = null;
-    return config;
   } else if (token && config.url === 'user/refresh') {
     const refreshToken = localStorage.getItem('refreshToken');
     config.headers['Authorization'] = 'Bearer ' + refreshToken;
-    return config;
   } else {
     config.headers['Authorization'] = 'Bearer ' + token;
-    return config;
   }
+  return config;
 });
 
 commonAxios.interceptors.response.use(
