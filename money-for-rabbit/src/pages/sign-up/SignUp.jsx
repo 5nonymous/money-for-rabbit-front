@@ -25,7 +25,7 @@ function SignUp() {
   });
   const messages = {
     email: '인증 메일을 받을 수 있는 주소를 입력해주세요.',
-    username: '닉네임은 2~7자만 가능합니다.',
+    username: '닉네임은 2~5자만 가능합니다.',
     passwordChar: '비밀번호는 대문자와 특수기호를 포함해야합니다.',
     passwordLength: '비밀번호는 12~16자만 가능합니다.',
     passwordCheck: '비밀번호가 일치하지 않습니다.',
@@ -44,8 +44,15 @@ function SignUp() {
     if (id === 'email') {
       setMessage({ [id]: messages[id] });
     } else if (id === 'username') {
-      if (value.length < 2 || value.length > 7) {
+      if (value.length < 2 || value.length > 5) {
         setMessage({ [id]: messages[id] });
+
+        if (value.length > 5) {
+          setUserData((prevState) => ({
+            ...prevState,
+            username: value.slice(0, 5),
+          }));
+        }
       }
     } else if (id === 'password') {
       if (value.length < 12 || value.length > 16) {
@@ -112,7 +119,7 @@ function SignUp() {
               type={'text'}
               style={'sign'}
               placeholder={'닉네임'}
-              maxLength={7}
+              maxLength={5}
             />
             {message['username'] && <p css={regularText(16)}>{message['username']}</p>}
           </div>
