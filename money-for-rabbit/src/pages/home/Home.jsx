@@ -108,6 +108,7 @@ const bounceAnimation = keyframes`
 const wrapper = css`
   width: 100%;
   height: 100%;
+  min-height: 730px;
   position: relative;
   cursor: pointer;
   background: url(${getBackgroundImage()}) center/cover;

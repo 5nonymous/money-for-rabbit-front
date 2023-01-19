@@ -6,7 +6,10 @@ import commonAxios from '../../utils/commonAxios';
 import decodeJWT from '../../utils/decodeJWT';
 import common from '../../styles/common';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getBackgroundImage, getRabbitImage } from '../../utils/getDynamicImage';
+import {
+  getBackgroundImage,
+  getRabbitImage,
+} from '../../utils/getDynamicImage';
 import Modal from '../../components/modal/Modal';
 import TextButton from '../../components/button/TextButton';
 import IconButton from '../../components/button/IconButton';
@@ -86,13 +89,18 @@ function UserPage() {
                     <span>{username} 님은</span>
                   ) : (
                     <div css={userSettingBtn}>
-                      <span onClick={() => setProfileModal(true)}>{username}</span> 님
+                      <span onClick={() => setProfileModal(true)}>
+                        {username}
+                      </span>{' '}
+                      님
                     </div>
                   )}
                 </div>
                 <div>
-                  <span>{totalAmount && totalAmount.toLocaleString('ko-KR')}</span> 원
-                  {isOthersPage ? '을 모았어요.' : '이 모였어요.'}
+                  <span>
+                    {totalAmount && totalAmount.toLocaleString('ko-KR')}
+                  </span>{' '}
+                  원{isOthersPage ? '을 모았어요.' : '이 모였어요.'}
                 </div>
               </div>
 
@@ -107,12 +115,18 @@ function UserPage() {
               <div css={bottomText}>
                 <div>
                   절구통을 눌러
-                  {isOthersPage ? ' 쪽지를 전달하세요.' : ' 받은 쪽지를 확인해보세요.'}
+                  {isOthersPage
+                    ? ' 쪽지를 전달하세요.'
+                    : ' 받은 쪽지를 확인해보세요.'}
                 </div>
               </div>
 
-              {profileModal && <Modal type={'profile'} close={() => setProfileModal(false)} />}
-              {!accessToken && loginModal && <Modal type={'signIn'} close={() => setLoginModal(false)} />}
+              {profileModal && (
+                <Modal type={'profile'} close={() => setProfileModal(false)} />
+              )}
+              {!accessToken && loginModal && (
+                <Modal type={'signIn'} close={() => setLoginModal(false)} />
+              )}
             </>
           )}
     </div>
@@ -125,6 +139,7 @@ const wrapper = () => css`
   background: url(${getBackgroundImage()}) center/cover;
   width: 100%;
   height: 100%;
+  min-height: 730px;
   position: relative;
 
   display: flex;
