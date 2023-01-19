@@ -20,20 +20,26 @@ function Letter() {
   const userId = pathname.split('/')[2];
   const letterId = pathname.split('/')[4];
 
-  axios
-    .get(`http://tgoddessana.pythonanywhere.com/api/user/${userId}`)
-    .then((res) => {
-      setUsername(res.data.user_info.username);
-    });
+  const now = new Date().getTime();
+  const OPEN_DATE = new Date('2023-01-22').getTime();
 
   useEffect(() => {
-    axios
-      .get(
-        `http://tgoddessana.pythonanywhere.com/api/user/${userId}/messages/${letterId}`
-      )
-      .then((res) => {
-        setData(res.data);
-      });
+    if (now < OPEN_DATE) {
+      alert('쪽지는 설날인 22일부터 확인할 수 있습니다.');
+    } else {
+      axios
+        .get(
+          `http://tgoddessana.pythonanywhere.com/api/user/${userId}/messages/${letterId}`
+        )
+        .then((res) => {
+          setData(res.data);
+        });
+      axios
+        .get(`http://tgoddessana.pythonanywhere.com/api/user/${userId}`)
+        .then((res) => {
+          setUsername(res.data.user_info.username);
+        });
+    }
   }, []);
 
   const onClickCaptureBtn = () => {
@@ -62,20 +68,26 @@ function Letter() {
       <div css={textButtonWrapper} id="prevBtn">
         <TextButton label={'이전'} onClick={() => navigate(-1)} />
       </div>
-      <h1>{username} 님이 받은 세뱃돈 입니다.</h1>
-      <div css={lettersWrapper}>
-        {data && (
-          <Box
-            size={'big'}
-            writer={data.author_name}
-            contents={data.message}
-            priceImg={data.image_name}
-          />
-        )}
-      </div>
-      <div css={btnWrapper} id="captureBtn">
-        <IconButton capture onClick={onClickCaptureBtn} />
-      </div>
+      {now < OPEN_DATE ? (
+        '쪽지는 설날인 22일부터 확인할 수 있습니다.'
+      ) : (
+        <>
+          <h1>{username} 님이 받은 세뱃돈 입니다.</h1>
+          <div css={lettersWrapper}>
+            {data && (
+              <Box
+                size={'big'}
+                writer={data.author_name}
+                contents={data.message}
+                priceImg={data.image_name}
+              />
+            )}
+          </div>
+          <div css={btnWrapper} id="captureBtn">
+            <IconButton capture onClick={onClickCaptureBtn} />
+          </div>
+        </>
+      )}
     </div>
   );
 }
