@@ -5,7 +5,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { css } from '@emotion/react';
 import common from '../../styles/common';
 import TextButton from '../../components/button/TextButton';
-import { letterData as dummyData } from './dummyData';
 import Box from './Box';
 import IconButton from '../../components/button/IconButton';
 import html2canvas from 'html2canvas';
@@ -85,6 +84,8 @@ export default Letter;
 const wrapper = css`
   width: 390px;
   height: 100%;
+  min-height: 730px;
+  background-color: ${common.color.white};
   position: relative;
   ${common.align.centerColumn};
   h1 {
