@@ -126,6 +126,7 @@ const contents = css`
   table {
     margin: 10px 0;
     border-collapse: collapse;
+    font-size: 14px;
 
     th,
     td {
