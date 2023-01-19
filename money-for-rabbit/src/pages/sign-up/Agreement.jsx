@@ -38,8 +38,6 @@ function Agreement({ close }) {
                   <td>
                     회원 식별 및<br />
                     홍보 이메일 발송
-                    <br />
-                    (2회)
                   </td>
                   <td>이메일</td>
                   <td>
@@ -158,6 +156,7 @@ const agreement = css`
     background-color: ${common.color.brown4};
 
     &::after {
+      font-family: 'BMDOHYEON';
       content: '\u2713';
       position: absolute;
       top: -8px;
