@@ -113,7 +113,7 @@ export default LetterList;
 const wrapper = css`
   width: 100%;
   height: 100%;
-  min-height: 760px;
+  min-height: 730px;
   background-color: ${common.color.white};
 
   ${common.align.centerColumn};
@@ -140,13 +140,12 @@ const lettersWrapper = css`
   ${common.align.centerRow};
   justify-content: space-between;
   flex-wrap: wrap;
-  background-color: red;
 
   > div:not(:nth-of-type(4) ~ div) {
     margin-bottom: 47px;
   }
 
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;
 
 const paginationWrapper = css`
@@ -156,9 +155,7 @@ const paginationWrapper = css`
   gap: 20px;
   ${common.fontSize[24]};
   color: ${common.color.brown3};
-
-  background-color: blue;
-  height: 50px;
+  margin-bottom: 10px;
 `;
 
 const Icon = styled(FontAwesomeIcon)`
