@@ -126,6 +126,7 @@ const contents = css`
   table {
     margin: 10px 0;
     border-collapse: collapse;
+    font-size: 14px;
 
     th,
     td {
@@ -157,7 +158,7 @@ const agreement = css`
     background-color: ${common.color.brown4};
 
     &::after {
-      content: '✓';
+      content: '\u2713';
       position: absolute;
       top: -8px;
       left: -1px;
