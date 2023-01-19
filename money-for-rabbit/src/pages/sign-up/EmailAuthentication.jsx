@@ -51,8 +51,10 @@ function EmailAuthentication() {
 export default EmailAuthentication;
 
 const wrapper = css`
+  background-color: ${common.color.white};
   width: 100%;
   height: 100%;
+  min-height: 500px;
 
   ${common.align.centerColumn}
   gap: 49px;

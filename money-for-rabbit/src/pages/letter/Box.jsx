@@ -9,12 +9,16 @@ import { getMoneyImage } from '../../utils/getDynamicImage';
 
 function Box({ size, writer, priceImg, contents, messageId, userId }) {
   const navigate = useNavigate();
-  console.log('getMoneyImage(priceImg)', getMoneyImage(priceImg));
-  console.log('messageId :>> ', messageId);
-  console.log('userId :>> ', userId);
 
   const onClickBtn = () => {
-    navigate(`/user/${userId}/letters/${messageId}`);
+    const now = new Date().getTime();
+    const OPEN_DATE = new Date('2023-01-22').getTime();
+
+    if (now < OPEN_DATE) {
+      alert('쪽지는 설날인 22일부터 확인할 수 있습니다.');
+    } else {
+      navigate(`/user/${userId}/letters/${messageId}`);
+    }
   };
 
   return (

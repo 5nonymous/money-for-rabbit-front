@@ -6,12 +6,14 @@
   font-weight: normal;
   font-style: normal;
 }
+
 * {
   font-family: 'BMDOHYEON';
 }
 
 body {
   margin: 0;
+  background-color: #ecd189;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -173,7 +173,9 @@ const flexCenterCol = (gap) => css`
 `;
 
 const wrapper = css`
+  background-color: ${common.color.white};
   height: 100%;
+  min-height: 750px;
   color: ${common.color.brown4};
 `;
 
