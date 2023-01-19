@@ -26,8 +26,7 @@ function SignUp() {
   const messages = {
     email: '인증 메일을 받을 수 있는 주소를 입력해주세요.',
     username: '닉네임은 2~5자만 가능합니다.',
-    passwordChar: '비밀번호는 대문자와 특수기호를 포함해야합니다.',
-    passwordLength: '비밀번호는 12~16자만 가능합니다.',
+    password: '비밀번호는 12 ~ 16자 대문자 포함 영문,\n숫자 1개 및 특수 문자 1개를 포함해야 합니다.',
     passwordCheck: '비밀번호가 일치하지 않습니다.',
   };
   const pwRegex =
@@ -55,10 +54,8 @@ function SignUp() {
         }
       }
     } else if (id === 'password') {
-      if (value.length < 12 || value.length > 16) {
-        setMessage({ [id]: messages['passwordLength'] });
-      } else if (!pwRegex.test(value)) {
-        setMessage({ [id]: messages['passwordChar'] });
+      if (value.length < 12 || value.length > 16 || !pwRegex.test(value)) {
+        setMessage({ [id]: messages['password'] });
       } else {
         setMessage({});
       }
@@ -194,6 +191,7 @@ const boldText = css`
 const regularText = (size) => css`
   ${common.fontSize[size]}
   ${common.fontWeight.medium}
+  white-space: pre-wrap;
 `;
 
 const lineStyle = css`
