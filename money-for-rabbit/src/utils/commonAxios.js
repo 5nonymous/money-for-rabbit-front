@@ -35,7 +35,7 @@ commonAxios.interceptors.response.use(
           const { access_token, refresh_token } = response.data;
           localStorage.setItem('accessToken', access_token);
           localStorage.setItem('refreshToken', refresh_token);
-          originalRequest.headers.authorization = `Bearer ${access_token}`;
+          originalRequest.headers.Authorization = `Bearer ${access_token}`;
           return commonAxios(originalRequest);
         })
         .catch(() => {
