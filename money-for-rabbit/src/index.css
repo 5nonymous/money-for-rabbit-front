@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400&display=swap');
+@font-face {
+  font-family: 'BMDOHYEON';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'BMDOHYEON';
+}
+
+body {
+  margin: 0;
+  background-color: #ecd189;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+p,
+h1 {
+  margin: 0;
+}
+
+input[type='password'] {
+  font-family: 'Nanum Gothic', sans-serif !important;
+}
+input[type='password']::placeholder {
+  font-family: 'BMDOHYEON';
+}
