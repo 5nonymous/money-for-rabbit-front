@@ -29,11 +29,7 @@ function SelectMoney() {
 
   const checkMoney = (m) => {
     if (m) {
-      return m <= 0 || m > 1000000
-        ? alert(
-            '알맞은 금액을 입력해주세요.\n최소 금액: 1원, 최대 금액: 100만원'
-          )
-        : true;
+      return m <= 0 || m > 1000000 ? alert('알맞은 금액을 입력해주세요.\n최소 금액: 1원, 최대 금액: 100만원') : true;
     } else {
       return alert('금액을 입력해주세요.');
     }
@@ -53,9 +49,6 @@ function SelectMoney() {
     navigate(`/user/${userId}/new/message`, {
       state: { money: choice, isMoneyBag: isMoneyBag },
     });
-    console.log(
-      `${choice}원 선택, ${userId}에게 전달할 쪽지 작성 페이지로 이동`
-    );
   };
 
   return (
@@ -67,16 +60,11 @@ function SelectMoney() {
           {money.map((m) => {
             const moneyStyles = [moneyBox(m)];
 
-            m === selectedMoney
-              ? moneyStyles.push(selected)
-              : moneyStyles.push(notSelected);
+            m === selectedMoney ? moneyStyles.push(selected) : moneyStyles.push(notSelected);
 
             return (
-              <div
-                key={m}
-                css={moneyStyles}
-                onClick={() => handleImageClick(m)}>
-                <img src={`/images/Money_${m}.png`} alt="" />
+              <div key={m} css={moneyStyles} onClick={() => handleImageClick(m)}>
+                <img src={`/images/Money_${m}.png`} alt='' />
               </div>
             );
           })}
@@ -84,13 +72,7 @@ function SelectMoney() {
 
         <form css={moneyForm} onSubmit={handleSubmit} ref={formRef}>
           <div onClick={() => setSelectedMoney(99999)}>
-            <Input
-              type={'number'}
-              style={'price'}
-              placeholder={'금액을 입력해주세요.'}
-              min={1}
-              max={1000000}
-            />
+            <Input type={'number'} style={'price'} placeholder={'금액을 입력해주세요.'} min={1} max={1000000} />
           </div>
         </form>
 
