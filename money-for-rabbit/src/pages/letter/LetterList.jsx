@@ -87,26 +87,29 @@ function LetterList() {
       <div css={textButtonWrapper}>
         <TextButton label={'이전'} onClick={() => navigate(-1)} />
       </div>
-      {data && (
-        <>
-          <h1>{data.user_info.username} 님이 받은 세뱃돈 입니다.</h1>
-          <div css={lettersWrapper}>
-            {data.messages.map((el) => {
-              return (
-                <Box
-                  key={el.id}
-                  size={'small'}
-                  writer={el.author_name}
-                  priceImg={el.image_name}
-                  messageId={el.id}
-                  userId={getUserNumber()}
-                />
-              );
-            })}
-          </div>
-          {pagination()}
-        </>
-      )}
+      {data &&
+        (data.messages.length > 0 ? (
+          <>
+            <h1>{data.user_info.username} 님이 받은 세뱃돈 입니다.</h1>
+            <div css={lettersWrapper}>
+              {data.messages.map((el) => {
+                return (
+                  <Box
+                    key={el.id}
+                    size={'small'}
+                    writer={el.author_name}
+                    priceImg={el.image_name}
+                    messageId={el.id}
+                    userId={getUserNumber()}
+                  />
+                );
+              })}
+            </div>
+            {pagination()}
+          </>
+        ) : (
+          '받은 세뱃돈이 없습니다.'
+        ))}
     </div>
   );
 }
