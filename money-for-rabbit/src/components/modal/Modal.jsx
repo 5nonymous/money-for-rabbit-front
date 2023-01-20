@@ -41,6 +41,7 @@ function Modal({ close, type }) {
       .then((res) => {
         console.log(res);
         localStorage.setItem('accessToken', res.data.access_token);
+        localStorage.setItem('refreshToken', res.data.refresh_token);
 
         navigate(`/user/${getUserNumber()}`);
       })
@@ -81,6 +82,7 @@ function Modal({ close, type }) {
 
   const onClickLogOut = () => {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     alert('로그아웃 되었습니다.');
     navigate('/');
   };
