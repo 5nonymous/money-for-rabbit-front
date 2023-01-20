@@ -26,16 +26,23 @@ function LetterList() {
   const PAGE_LIMIT = 6;
   const pageCount = 3;
 
-  useEffect(() => {
-    commonAxios
-      .get(`user/${getUserNumber()}/messages?page=${currentPage}`)
-      .then((res) => {
-        setData(res.data);
-        setTotalPage(Math.ceil(res.data['message_set_count'] / PAGE_LIMIT));
-        setPageGroup(Math.ceil(currentPage / pageCount));
-      })
+  const now = new Date().getTime();
+  const OPEN_DATE = new Date('2023-01-22').getTime();
 
-      .catch((err) => console.log(err.response.data.error));
+  useEffect(() => {
+    if (now < OPEN_DATE) {
+      alert('쪽지는 설날인 22일부터 확인할 수 있습니다.');
+    } else {
+      commonAxios
+        .get(`user/${getUserNumber()}/messages?page=${currentPage}`)
+        .then((res) => {
+          setData(res.data);
+          setTotalPage(Math.ceil(res.data['message_set_count'] / PAGE_LIMIT));
+          setPageGroup(Math.ceil(currentPage / pageCount));
+        })
+
+        .catch((err) => console.log(err.response.data.error));
+    }
   }, [currentPage]);
 
   const pagination = () => {
@@ -87,29 +94,31 @@ function LetterList() {
       <div css={textButtonWrapper}>
         <TextButton label={'이전'} onClick={() => navigate(-1)} />
       </div>
-      {data &&
-        (data.messages.length > 0 ? (
-          <>
-            <h1>{data.user_info.username} 님이 받은 세뱃돈 입니다.</h1>
-            <div css={lettersWrapper}>
-              {data.messages.map((el) => {
-                return (
-                  <Box
-                    key={el.id}
-                    size={'small'}
-                    writer={el.author_name}
-                    priceImg={el.image_name}
-                    messageId={el.id}
-                    userId={getUserNumber()}
-                  />
-                );
-              })}
-            </div>
-            {pagination()}
-          </>
-        ) : (
-          '받은 세뱃돈이 없습니다.'
-        ))}
+      {now < OPEN_DATE
+        ? '쪽지는 설날인 22일부터 확인할 수 있습니다.'
+        : data &&
+          (data.messages.length > 0 ? (
+            <>
+              <h1>{data.user_info.username} 님이 받은 세뱃돈 입니다.</h1>
+              <div css={lettersWrapper}>
+                {data.messages.map((el) => {
+                  return (
+                    <Box
+                      key={el.id}
+                      size={'small'}
+                      writer={el.author_name}
+                      priceImg={el.image_name}
+                      messageId={el.id}
+                      userId={getUserNumber()}
+                    />
+                  );
+                })}
+              </div>
+              {pagination()}
+            </>
+          ) : (
+            '받은 세뱃돈이 없습니다.'
+          ))}
     </div>
   );
 }

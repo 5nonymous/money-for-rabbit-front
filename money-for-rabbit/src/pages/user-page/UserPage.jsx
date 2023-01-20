@@ -60,11 +60,18 @@ function UserPage() {
   }, [userId, accessToken, navigate]);
 
   function handleClick() {
+    const now = new Date().getTime();
+    const OPEN_DATE = new Date('2023-01-22').getTime();
+
     if (accessToken) {
       if (isOthersPage) {
         navigate(`/user/${userId}/new`);
       } else {
-        navigate(`/user/${userId}/letters`);
+        if (now < OPEN_DATE) {
+          alert('쪽지는 설날인 22일부터 확인할 수 있습니다.');
+        } else {
+          navigate(`/user/${userId}/letters`);
+        }
       }
     } else {
       setLoginModal(true);
