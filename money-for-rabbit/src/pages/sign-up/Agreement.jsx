@@ -38,8 +38,6 @@ function Agreement({ close }) {
                   <td>
                     회원 식별 및<br />
                     홍보 이메일 발송
-                    <br />
-                    (2회)
                   </td>
                   <td>이메일</td>
                   <td>
@@ -126,6 +124,7 @@ const contents = css`
   table {
     margin: 10px 0;
     border-collapse: collapse;
+    font-size: 14px;
 
     th,
     td {
@@ -157,11 +156,14 @@ const agreement = css`
     background-color: ${common.color.brown4};
 
     &::after {
-      content: '✓';
+      content: '';
+      width: 16px;
+      height: 16px;
+      background: url('/images/check.svg') no-repeat center/cover;
+      background-position: -1px -1px;
       position: absolute;
-      top: -8px;
-      left: -1px;
-      color: ${common.color.white};
+      top: 0px;
+      left: 0px;
       font-size: 20px;
     }
   }
