@@ -46,6 +46,9 @@ function LetterList() {
     }
 
     let firstNumber = lastNumber - (pageCount - 1);
+    if (firstNumber < 1) {
+      firstNumber = 1;
+    }
     let pageNumList = [];
 
     const next = lastNumber + 1;
