@@ -13,8 +13,7 @@ function Home() {
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
 
-  const rabbitImageURL =
-    process.env.PUBLIC_URL + '/images/Rabbit_NoBackground_Default3.png';
+  const rabbitImageURL = process.env.PUBLIC_URL + '/images/Rabbit_NoBackground_Default3.png';
 
   const openModal = () => {
     setIsModal(true);
@@ -26,9 +25,7 @@ function Home() {
 
   const onClickScreen = (e) => {
     if (e.target === e.currentTarget) {
-      localStorage.getItem('accessToken')
-        ? navigate(`/user/${getUserNumber()}`)
-        : openModal();
+      localStorage.getItem('accessToken') ? navigate(`/user/${getUserNumber()}`) : openModal();
     }
   };
 
@@ -36,7 +33,7 @@ function Home() {
     <div css={wrapper} onClick={onClickScreen}>
       <div css={svgWrapper}>
         <svg css={svgStyle({ isModal })} onClick={onClickScreen}>
-          <text css={svgText} x="10" y="40" onClick={onClickScreen}>
+          <text css={svgText} x='10' y='40' onClick={onClickScreen}>
             화면을 터치하세요
           </text>
         </svg>
@@ -46,6 +43,7 @@ function Home() {
         <Notion />
       </div>
       {isModal && <Modal close={closeModal} type={'signIn'} />}
+      {/* <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fmoney-for-rabbit.netlify.app&count_bg=%23F5B3B8&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a> */}
     </div>
   );
 }
