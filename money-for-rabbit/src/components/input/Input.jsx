@@ -4,12 +4,23 @@ import React from 'react';
 import { css } from '@emotion/react';
 import common from '../../styles/common';
 
-function Input({ id, value, type, style, placeholder, onChange, maxLength }) {
+function Input({
+  id,
+  value,
+  type,
+  style,
+  placeholder,
+  onChange,
+  maxLength,
+  min,
+  max,
+}) {
   const inputStyle = {
     sign,
     nickname,
     price,
   };
+
   return (
     <input
       id={id}
@@ -19,7 +30,8 @@ function Input({ id, value, type, style, placeholder, onChange, maxLength }) {
       placeholder={placeholder}
       onChange={onChange}
       maxLength={maxLength}
-    ></input>
+      min={min}
+      max={max}></input>
   );
 }
 
