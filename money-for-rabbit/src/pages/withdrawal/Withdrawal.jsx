@@ -39,6 +39,8 @@ function Withdrawal() {
             })
             .then(() => {
               alert('탈퇴했습니다');
+              localStorage.removeItem('accessToken');
+              localStorage.removeItem('refreshToken');
               navigate('/withdrawal/done');
             })
             .catch((err) => console.log(err.response.data));
