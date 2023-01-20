@@ -39,7 +39,6 @@ function Modal({ close, type }) {
     axios
       .post('http://tgoddessana.pythonanywhere.com/api/user/login', inputInfo)
       .then((res) => {
-        console.log(res);
         localStorage.setItem('accessToken', res.data.access_token);
         localStorage.setItem('refreshToken', res.data.refresh_token);
 
@@ -70,7 +69,7 @@ function Modal({ close, type }) {
           alert(`${username}으로 닉네임 변경했습니다.`);
           window.location.reload();
         })
-        .catch((err) => console.log(err.response.data));
+        .catch((err) => alert(err.response.data.error));
     } else {
       alert('입력값이 없습니다.');
     }
@@ -123,12 +122,7 @@ function Modal({ close, type }) {
   const Profile = (
     <div css={wrapper({ type })}>
       <div css={inputWrapper}>
-        <Input
-          type={'text'}
-          style={'nickname'}
-          placeholder={'닉네임 입력'}
-          onChange={handleChangeUserName}
-        />
+        <Input type={'text'} style={'nickname'} placeholder={'닉네임 입력'} onChange={handleChangeUserName} />
         <span onClick={onClickNicknameHandler}>변경</span>
       </div>
       <div css={buttonWrapper}>
@@ -181,8 +175,7 @@ const wrapper = (props) => css`
   border-radius: 20px;
   padding-top: 32px;
   padding-bottom: 14px;
-  ${props.type === 'profile' &&
-  'padding-left: 30px; padding-right: 30px; padding-bottom: 30px;'};
+  ${props.type === 'profile' && 'padding-left: 30px; padding-right: 30px; padding-bottom: 30px;'};
   cursor: default;
 
   p {

@@ -24,11 +24,8 @@ commonAxios.interceptors.response.use(
   },
   (error) => {
     const originalRequest = error.config;
-    console.log('originalRequest :>> ', originalRequest);
-    if (
-      error.response.status === 401 &&
-      error.response.data.error === '토큰이 만료되었습니다.'
-    ) {
+
+    if (error.response.status === 401 && error.response.data.error === '토큰이 만료되었습니다.') {
       commonAxios
         .post('user/refresh')
         .then((response) => {

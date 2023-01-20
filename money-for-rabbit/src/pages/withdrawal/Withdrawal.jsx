@@ -27,7 +27,7 @@ function Withdrawal() {
       .get(`user/${getUserNumber()}`)
       .then((res) => {
         const username = res.data.user_info.username;
-        console.log('user', { username });
+
         if (username === inputUsername) {
           axios
             .delete('http://tgoddessana.pythonanywhere.com/api/user/withdraw', {
@@ -43,13 +43,13 @@ function Withdrawal() {
               localStorage.removeItem('refreshToken');
               navigate('/withdrawal/done');
             })
-            .catch((err) => console.log(err.response.data));
+            .catch((err) => alert(err.response.data.error));
         } else {
           alert('닉네임을 다시한번 확인해주세요.');
           setInputUsername('');
         }
       })
-      .catch((err) => console.log(err.response.data.error));
+      .catch((err) => alert(err.response.data.error));
   };
 
   return (
@@ -142,6 +142,5 @@ const image = css`
   position: absolute;
   bottom: 0;
   left: 85px;
-  background: url('./images/Rabbit_noBackground_under1000.png') top/cover
-    no-repeat;
+  background: url('./images/Rabbit_noBackground_under1000.png') top/cover no-repeat;
 `;

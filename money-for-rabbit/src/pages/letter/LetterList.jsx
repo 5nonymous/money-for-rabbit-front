@@ -41,7 +41,7 @@ function LetterList() {
           setPageGroup(Math.ceil(currentPage / pageCount));
         })
 
-        .catch((err) => console.log(err.response.data.error));
+        .catch((err) => alert(err.response.data.error));
     }
   }, [currentPage]);
 
@@ -60,12 +60,8 @@ function LetterList() {
 
     const next = lastNumber + 1;
     const prev = firstNumber - 1;
-    const prevBtn = (
-      <Icon icon={faAngleLeft} onClick={() => setCurrentPage(prev)} />
-    );
-    const nextBtn = (
-      <Icon icon={faAngleRight} onClick={() => setCurrentPage(next)} />
-    );
+    const prevBtn = <Icon icon={faAngleLeft} onClick={() => setCurrentPage(prev)} />;
+    const nextBtn = <Icon icon={faAngleRight} onClick={() => setCurrentPage(next)} />;
 
     for (let num = firstNumber; num <= lastNumber; num++) {
       pageNumList.push(
