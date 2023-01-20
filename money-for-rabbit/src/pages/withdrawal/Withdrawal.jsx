@@ -58,7 +58,8 @@ function Withdrawal() {
       </div>
       <div>
         <p>탈퇴하실 경우 Money For Rabbit</p>
-        <p>서비스 이용이 불가합니다.</p>
+        <p>서비스 이용이 불가하며</p>
+        <p>보냈던 세뱃돈과 덕담은 사라집니다.</p>
         <p>
           탈퇴하시려면 <span>[닉네임]</span>을 입력해주세요.
         </p>
