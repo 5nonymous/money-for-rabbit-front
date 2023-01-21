@@ -16,6 +16,7 @@ function SignUp() {
   const [modal, setModal] = useState(false);
   const [message, setMessage] = useState({});
   const [isInput, setIsInput] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [agreementInfo, setAgreementInfo] = useState(true);
   const [userData, setUserData] = useState({
     email: '',
@@ -78,7 +79,7 @@ function SignUp() {
         })
         .catch((err) => {
           let errorMessage = err.response.data;
-
+          setIsLoading(false);
           alert(errorMessage['error']);
         });
     } else {
@@ -143,7 +144,9 @@ function SignUp() {
             )}
           </div>
 
-          <BoxButton type={'submit'}>회원가입</BoxButton>
+          <BoxButton type={'submit'} onClick={() => setIsLoading(true)}>
+            회원가입
+          </BoxButton>
         </form>
 
         <div css={flexCenterCol(20)}>
@@ -159,6 +162,7 @@ function SignUp() {
       </div>
       {modal && <Modal type={'signIn'} close={() => setModal(false)} />}
       {agreementInfo && <Agreement close={() => setAgreementInfo(false)} />}
+      {isLoading && <Spinner />}
     </div>
   );
 }
@@ -178,6 +182,7 @@ const wrapper = css`
   background-color: ${common.color.white};
   height: 100%;
   min-height: 750px;
+  position: relative;
   color: ${common.color.brown4};
 `;
 
@@ -198,4 +203,32 @@ const lineStyle = css`
   height: 3px;
 `;
 
+const spinnerStyle = css`
+  background: rgba(0, 0, 0, 0.5);
+  width: 390px;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  ${common.align.centerColumn}
+  gap: 15px;
+
+  color: ${common.color.brown2};
+
+  div {
+    background: url('/images/spinner.svg') center/cover;
+    width: 100px;
+    height: 100px;
+  }
+`;
+
 const Line = () => <div css={lineStyle} />;
+
+const Spinner = () => (
+  <div css={spinnerStyle}>
+    <div />
+    <p>잠시만 기다려주세요.</p>
+  </div>
+);
