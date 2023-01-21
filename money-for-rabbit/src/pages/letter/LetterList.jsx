@@ -27,11 +27,11 @@ function LetterList() {
   const pageCount = 3;
 
   const now = new Date().getTime();
-  const OPEN_DATE = new Date('2023-01-22').getTime();
+  const OPEN_DATE = 1674313200;
 
   useEffect(() => {
     if (now < OPEN_DATE) {
-      alert('쪽지는 설날인 22일부터 확인할 수 있습니다.');
+      alert(`${now} ${OPEN_DATE}쪽지는 설날인 22일부터 확인할 수 있습니다.`);
     } else {
       commonAxios
         .get(`user/${getUserNumber()}/messages?page=${currentPage}`)
@@ -41,7 +41,10 @@ function LetterList() {
           setPageGroup(Math.ceil(currentPage / pageCount));
         })
 
-        .catch((err) => alert(err.response.data.error));
+        .catch((err) => {
+          alert(err.response.data.error);
+          console.log('err', err);
+        });
     }
   }, [currentPage]);
 
@@ -60,8 +63,12 @@ function LetterList() {
 
     const next = lastNumber + 1;
     const prev = firstNumber - 1;
-    const prevBtn = <Icon icon={faAngleLeft} onClick={() => setCurrentPage(prev)} />;
-    const nextBtn = <Icon icon={faAngleRight} onClick={() => setCurrentPage(next)} />;
+    const prevBtn = (
+      <Icon icon={faAngleLeft} onClick={() => setCurrentPage(prev)} />
+    );
+    const nextBtn = (
+      <Icon icon={faAngleRight} onClick={() => setCurrentPage(next)} />
+    );
 
     for (let num = firstNumber; num <= lastNumber; num++) {
       pageNumList.push(
