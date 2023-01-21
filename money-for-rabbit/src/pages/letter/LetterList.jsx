@@ -31,7 +31,7 @@ function LetterList() {
 
   useEffect(() => {
     if (now < OPEN_DATE) {
-      alert(`${now} ${OPEN_DATE}쪽지는 설날인 22일부터 확인할 수 있습니다.`);
+      alert('쪽지는 설날인 22일부터 확인할 수 있습니다.');
     } else {
       commonAxios
         .get(`user/${getUserNumber()}/messages?page=${currentPage}`)
