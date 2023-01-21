@@ -12,7 +12,7 @@ function Box({ size, writer, priceImg, contents, messageId, userId }) {
 
   const onClickBtn = () => {
     const now = new Date().getTime();
-    const OPEN_DATE = new Date('2023-01-22').getTime();
+    const OPEN_DATE = 1674313200;
 
     if (now < OPEN_DATE) {
       alert('쪽지는 설날인 22일부터 확인할 수 있습니다.');
