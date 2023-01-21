@@ -32,6 +32,11 @@ function SignUp() {
   const pwRegex =
     /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[`~!@#$%^&*()\-_=+|[\]\\{};:'",.<>/?])[A-Za-z0-9`~!@#$%^&*()\-_=+|[\]\\{};:'",.<>/?]{12,16}/;
 
+  const handleFocus = (e) => {
+    const id = e.target.id;
+    setMessage({ [id]: messages[id] });
+  };
+
   const handleChangeInput = (e) => {
     const { id, value } = e.target;
 
@@ -40,29 +45,19 @@ function SignUp() {
       [id]: value,
     }));
 
-    if (id === 'email') {
-      setMessage({ [id]: messages[id] });
-    } else if (id === 'username') {
-      if (value.length < 2 || value.length > 5) {
-        setMessage({ [id]: messages[id] });
-
-        if (value.length > 5) {
-          setUserData((prevState) => ({
-            ...prevState,
-            username: value.slice(0, 5),
-          }));
-        }
+    if (id === 'username') {
+      if (value.length > 5) {
+        setUserData((prevState) => ({
+          ...prevState,
+          username: value.slice(0, 5),
+        }));
       }
     } else if (id === 'password') {
-      if (value.length < 12 || value.length > 16 || !pwRegex.test(value)) {
-        setMessage({ [id]: messages['password'] });
-      } else {
+      if (value.length >= 12 && value.length <= 16 && pwRegex.test(value)) {
         setMessage({});
       }
     } else if (id === 'passwordCheck') {
       setIsInput(true);
-      setMessage({});
-    } else {
       setMessage({});
     }
   };
@@ -102,6 +97,7 @@ function SignUp() {
               id={'email'}
               value={userData.email}
               onChange={handleChangeInput}
+              onFocus={handleFocus}
               type={'email'}
               style={'sign'}
               placeholder={'이메일 주소'}
@@ -113,6 +109,7 @@ function SignUp() {
               id={'username'}
               value={userData.username}
               onChange={handleChangeInput}
+              onFocus={handleFocus}
               type={'text'}
               style={'sign'}
               placeholder={'닉네임'}
@@ -125,6 +122,7 @@ function SignUp() {
               id={'password'}
               value={userData.password}
               onChange={handleChangeInput}
+              onFocus={handleFocus}
               type={'password'}
               style={'sign'}
               placeholder={'비밀번호'}
