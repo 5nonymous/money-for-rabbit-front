@@ -21,7 +21,7 @@ function Letter() {
   const letterId = pathname.split('/')[4];
 
   const now = new Date().getTime();
-  const OPEN_DATE = new Date('2023-01-22').getTime();
+  const OPEN_DATE = 1674313200;
 
   useEffect(() => {
     if (now < OPEN_DATE) {

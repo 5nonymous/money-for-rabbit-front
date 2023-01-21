@@ -61,7 +61,7 @@ function UserPage() {
 
   function handleClick() {
     const now = new Date().getTime();
-    const OPEN_DATE = new Date('2023-01-22').getTime();
+    const OPEN_DATE = 1674313200;
 
     if (accessToken) {
       if (isOthersPage) {
