@@ -32,4 +32,4 @@
 | <img src="https://user-images.githubusercontent.com/87893624/228295203-1ced3182-0c6b-4cff-bea2-520cba8bdf89.png" width="150"> | <img src="https://avatars.githubusercontent.com/u/51291185?v=4" width="150"> |
 |:--:|:--:|
 |<a href="https://github.com/HalamLee">Lami</a>  | <a href="https://github.com/overtae">overtae</a> |
-|<ul><li>전체적인 프로젝트 리딩과 배포</li><li>JWT 토큰을 이용한 로그인/로그아웃 기능 구현</li><li>받은 쪽지를 캡쳐할 수 있도록 기능 구현</li><li>접속한 기기를 확인해, 모바일일 경우 배경영상이 나오지 않도록 구현</li><li>2023년 1월 1일이 되었을 때 가입한 유저들에게 보내는 이메일 템플릿 퍼블리싱</li></ul>| |
+|<ul><li>전체적인 프로젝트 리딩과 배포</li><li>JWT 토큰을 이용한 로그인/로그아웃 기능 구현</li><li>받은 쪽지를 캡쳐할 수 있도록 기능 구현</li><li>접속한 기기를 확인해, 모바일일 경우 배경영상이 나오지 않도록 구현</li><li>2023년 1월 1일이 되었을 때 가입한 유저들에게 보내는 이메일 템플릿 퍼블리싱</li></ul>| <ul><li>중복으로 사용되는 디자인 요소들을 선택적으로 채택 및 통합</li><li>회원가입시 유저로부터 입력 받은 데이터들에 유효성 검사 로직 추가</li><li>JWT 토큰 디코딩 함수 추가</li><li>axios 모듈화 작업</li><li>interceptor를 이용해 로컬 스토리지에 유저의 JWT 토큰 저장 및 관리</li><li>백엔드 서버와 통신하여 데이터를 받아온 이후에 화면을 렌더링하도록 작업</li></ul> |
